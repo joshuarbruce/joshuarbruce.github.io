@@ -1,9 +1,4 @@
----
-layout: default
----
-<h1>{{ page.title }}</h1>
-<p class="meta">{{ page.date | date_to_string }}</p>
-
-<div class="post">
-  {{ content }}
-</div>
+--- layout: default notes: active ---
+{{ page.title }}
+{{ page.date | date_to_string }} {% if page.author %} by {{ page.author }} {% endif %} 
+{{ content }} 
