@@ -2,3 +2,4 @@ permalink: /notes/:year/:month/:day/:title
 markdown: kramdown
 url: https://www.joshuarbruce.com
 enforce_ssl: www.joshuarbruce.com
+google_analytics_tracking_id: UA-92164651-1
