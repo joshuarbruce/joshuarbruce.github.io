@@ -1,4 +1,4 @@
-permalink: /blog/:year/:month/:day/:title
+permalink: /notes/:year/:month/:day/:title
 markdown: kramdown
 url: https://joshuarbruce.com
 enforce_ssl: joshuarbruce.com
