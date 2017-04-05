@@ -55,6 +55,29 @@ xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'
 </code>
 </pre>
 
-We can thus see what the variables are in this dataset; there are 29 of them total. The value we're most interested in is the <code>identifierReport</code> field, which includes the patent number. 
+We can thus see what the variables are in this dataset; there are 29 of them total. The value we're most interested in is the <code>identifierReport</code> field, which includes the patent number. I find converting the XML results to a list makes it more easily explorable, which we do with the <code>xmlToList()</code> command.
 
-In addition to this record's information, the results also tell us how many total records there are in the fourth line of code, which begins with <code>records count="37220"</code>. 
+```r
+result_as_list <- xmlToList(xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0')))
+```
+
+Once converted to a list, we can see the number of variables in the first item as follows: <code>length(result_as_list$records[[1]])</code>. 
+
+In addition to this record's information, the results also tell us how many total records there are in the third line of the results, which states: <code>records count="37220"</code>. The entire DoE dataset is 37,220 records (as of April 5, 2017), and it grows continually as the DoE adds new information on old patents it identifies or new patents are issued.
+
+To collect the whole dataset, I begin by constructing a dataframe to hold all of the records.
+
+```r
+energy_records <- as.data.frame(matrix(nrow=37220, ncol = 29))
+```
+
+We can then add the variable names from our list to the <code>energy_records</code> dataframe, as follows.
+
+```r
+# Add variable names to data frame
+for(i in 1:ncol(energy_records)){
+  colnames(energy_records)[i] <- names(result_as_list$records[[1]])[i]
+}
+```
+
+
