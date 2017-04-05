@@ -1,2 +1,3 @@
-This short guide illustrates how to collect information on patents supported by the <a href="https://energy.gov/" target="blank">U.S. Department of Energy</a> through government-awarded grants and contracts. The data is available from a freely accessible <a href="https://www.osti.gov/home/XMLServices.html" target = "blank">DoE API</a>.
- 
+This short guide illustrates how to collect information on patents supported by the <a href="https://energy.gov/" target="blank">U.S. Department of Energy</a> through government-awarded grants and contracts. The data is available from a freely accessible <a href="https://www.osti.gov/home/XMLServices.html" target = "blank">DoE API</a>. I'm using <a href="https://www.r-project.org/" target="blank">R</a> to download and manipulate this data. 
+
+To begin, you'll need to install or <code>require</code> the R libraries <a href="https://cran.r-project.org/web/packages/XML/index.html" target = "blank">XML</a> and <a href="https://cran.r-project.org/web/packages/xml2/index.html" target="blank">xml2</a>. 
