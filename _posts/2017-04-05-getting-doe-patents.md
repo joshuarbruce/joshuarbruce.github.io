@@ -14,8 +14,8 @@ xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'
 ```
 <pre class="prettyprint pre-scrollable">
 <code>
-<?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcq="http://purl.org/dc/terms/">
+&lt;?xml version="1.0" encoding="UTF-8"?&rt;
+&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcq="http://purl.org/dc/terms/"&rt;
   <records count="37220" morepages="true" start="1" end="1">
     <record rownumber="1">
       <dc:title>Silicon carbide whisker reinforced ceramic composites and method for making same</dc:title>
