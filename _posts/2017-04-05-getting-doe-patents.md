@@ -7,11 +7,14 @@ require(XML)
 require(xml2)
 ```
 
-These packages make it simple to download and reformat the raw <a href="https://en.wikipedia.org/wiki/XML" target="blank">XML files</a> from the DoE API. To get a sense of what this data looks like, we can download and inspect a single record. The base text of the API call is: <code>ht<i></i>tps://ww<i></i>w.osti.g<i></i>ov/doepatents/doepatentsxml?</code>, to which we add <code>nrows=1&page=0</code>, telling the API we only want the first result of however many pages are avaialable. In order to make sense of the results, we will also parse the XML results.
+These packages make it simple to download and reformat the raw <a href="https://en.wikipedia.org/wiki/XML" target="blank">XML files</a> from the DoE API. To get a sense of what this data looks like, we can download and inspect a single record. The base text of the API call is: <code>ht<i></i>tps://ww<i></i>w.osti.g<i></i>ov/doepatents/doepatentsxml?</code>, to which we add <code>nrows=1&page=0</code>, telling the API we only want the first result of however many pages are avaialable. In order to make sense of the results, we will also parse the XML results...
 
 ```r
 xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'))
 ```
+
+... which returns the following:
+
 <pre class="prettyprint pre-scrollable">
 <code>
 &lt;?xml version="1.0" encoding="UTF-8"?&rt;
@@ -52,5 +55,6 @@ xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'
 </code>
 </pre>
 
+We can thus see what the variables are in this dataset; there are 29 of them total. The value we're most interested in is the <code>identifierReport</code> field, which includes the patent number. 
 
-To be continued...
+In addition to this record's information, the results also tell us how many total records there are in the fourth line of code, which begins with <code>records count="37220"</code>. 
