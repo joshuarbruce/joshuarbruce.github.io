@@ -12,7 +12,7 @@ These packages make it simple to download and reformat the raw <a href="https://
 ```r
 xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'))
 ```
-<pre-wrap class="prettyprint pre-scrollable">
+<pre class="prettyprint pre-scrollable">
 <code>
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcq="http://purl.org/dc/terms/">
@@ -50,6 +50,7 @@ xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'
   </records>
 </rdf:RDF>
 </code>
-</pre-wrap>
+</pre>
+
 
 To be continued...
