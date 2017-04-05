@@ -50,3 +50,5 @@ xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'
 </rdf:RDF>
 </code>
 </pre>
+
+To be continued...
