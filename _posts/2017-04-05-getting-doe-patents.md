@@ -7,4 +7,4 @@ require(XML)
 require(xml2)
 ```
 
-These packages make it simple to download and reformat the raw <a href="https://en.wikipedia.org/wiki/XML" target="blank">XML files</a> from the DoE API. To get a sense of what this data looks like, we can download and inspect a single record. The base text of the API call is: <code>https://www.osti.gov/doepatents/doepatentsxml?</code>, to which we add <code>nrows=1&page=0</code>, telling the API we only want the first result of however many pages are avaialable. 
+These packages make it simple to download and reformat the raw <a href="https://en.wikipedia.org/wiki/XML" target="blank">XML files</a> from the DoE API. To get a sense of what this data looks like, we can download and inspect a single record. The base text of the API call is: <code><a href="#" class="diables">https://www.osti.gov/doepatents/doepatentsxml?</a></code>, to which we add <code>nrows=1&page=0</code>, telling the API we only want the first result of however many pages are avaialable. 
