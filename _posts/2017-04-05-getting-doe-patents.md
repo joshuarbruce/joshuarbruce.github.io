@@ -2,18 +2,17 @@ This short guide illustrates how to collect information on patents supported by 
 
 To begin, you'll need to <code>require</code> the R libraries <a href="https://cran.r-project.org/web/packages/XML/index.html" target = "blank">XML</a> and <a href="https://cran.r-project.org/web/packages/xml2/index.html" target="blank">xml2</a>. 
 
-```{r}
+```r
 require(XML)
 require(xml2)
 ```
 
 These packages make it simple to download and reformat the raw <a href="https://en.wikipedia.org/wiki/XML" target="blank">XML files</a> from the DoE API. To get a sense of what this data looks like, we can download and inspect a single record. The base text of the API call is: <code>ht<i></i>tps://ww<i></i>w.osti.g<i></i>ov/doepatents/doepatentsxml?</code>, to which we add <code>nrows=1&page=0</code>, telling the API we only want the first result of however many pages are avaialable. In order to make sense of the results, we will also parse the XML results.
 
-```{r}
+```r
 xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'))
 ```
 <pre class="prettyprint pre-scrollable"><code>
-<div>
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcq="http://purl.org/dc/terms/">
   <records count="37220" morepages="true" start="1" end="1">
@@ -49,6 +48,5 @@ xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'
     </record>
   </records>
 </rdf:RDF>
-</div>
 </code>
 </pre>
