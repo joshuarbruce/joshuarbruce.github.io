@@ -68,7 +68,7 @@ In addition to this record's information, the results also tell us how many tota
 To collect the whole dataset, I begin by constructing a dataframe to hold all of the records.
 
 ```r
-energy_records <- as.data.frame(matrix(nrow=37220, ncol = 29))
+energy_records <- as.data.frame(matrix(nrow = 37220, ncol = 29))
 ```
 
 We can then add the variable names from our list to the <code>energy_records</code> dataframe, as follows.
@@ -80,4 +80,31 @@ for(i in 1:ncol(energy_records)){
 }
 ```
 
+Having created a dataframe to store the whole DoE database (as it exists at the time of data collection), a loop can be used to iteratively call the DoE API, transform the XML results, and place the relevant information in the corresponding columns of the <code>energy_records</code> dataframe. I have broken apart the XML processing steps to better understand any errors that emerge while the loop is running, but this isn't necessary. Note that I have changed the number of records returned per page to 3000, the maximum allowed by the API. Given the 37,000+ records, we need to run the call 13 times to get all results, leading to <code>for(k in 0:12)</code> in the first line of code.
+
+```r
+# Loop to get all DoE records 
+for(k in 0:12){
+  step1 <- read_xml(paste0('https://www.osti.gov/doepatents/doepatentsxml?nrows=3000&page=',k))
+  step2 <- xmlParse(step1)
+  step3 <- xmlToList(step2)
+  closeAllConnections()
+  for(i in 1:length(step3$records)){
+    for(j in 1:length(step3$records[[1]])){
+      if(k == 0){
+        try({
+          energy_records[i,j] <- step3$records[[i]][[j]][1] },
+          silent = TRUE )
+      }
+      if(k > 0){
+        try({
+          energy_records[(i+(3001*(k-1))),j] <- step3$records[[i]][[j]][1] },
+          silent = TRUE )
+      }
+    }
+    # I print the page and row number as a status marker, but not necessary 
+    print(paste0(k,': ', i))
+  }
+}
+```
 
