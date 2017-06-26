@@ -107,3 +107,8 @@ pre.prettyprint { padding: 10px !important; margin: 40px; font-size: 12px;}
     margin-top: -5px;
     margin-bottom: 10px;
 }
+
+/* Override the bootstrap style */
+blockquote {
+    border-left: none;
+}
