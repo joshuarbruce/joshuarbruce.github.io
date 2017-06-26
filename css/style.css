@@ -7,20 +7,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Merriweathe
 
 blockquote p { font-size: 16px; line-height: 1.6em;}
 
-/* Create custom horizontal line */
-.customHr {
-    width: 100%
-    font-size: 1px;
-    color: rgba(0, 0, 0, 0);
-    line-height: 1px;
-    margin-left: 5em;
-    margin-right: 5em;
-    
-    background-color: grey;
-    margin-top: -5px;
-    margin-bottom: 10px;
-}
-
 /* Masthead */
 .header, .footer, .header h2, .header h3 { font-family: 'Montserrat', Helvetica, sans-serif; text-transform: uppercase; font-weight: normal; }
 
