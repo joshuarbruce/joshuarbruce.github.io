@@ -7,6 +7,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Merriweathe
 
 blockquote p { font-size: 16px; line-height: 1.6em; }
 
+/* Override the bootstrap style */
+blockquote {
+    border-left: none;
+}
+
 /* Masthead */
 .header, .footer, .header h2, .header h3 { font-family: 'Montserrat', Helvetica, sans-serif; text-transform: uppercase; font-weight: normal; }
 
