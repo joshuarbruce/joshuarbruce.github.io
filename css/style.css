@@ -5,11 +5,20 @@ body { padding-top: 20px; padding-bottom: 40px; font-family: 'Merriweather', Geo
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Merriweather', Georgia, Times; font-weight: 700;}
 
-blockquote p { font-size: 16px; line-height: 1.6em; }
+blockquote p { font-size: 16px; line-height: 1.6em; border-left: none;}
 
-/* Override the bootstrap style */
-blockquote {
-    border-left: none;
+/* Create custom horizontal line */
+.customHr {
+    width: 100%
+    font-size: 1px;
+    color: rgba(0, 0, 0, 0);
+    line-height: 1px;
+    margin-left: 5em;
+    margin-right: 5em;
+    
+    background-color: grey;
+    margin-top: -6px;
+    margin-bottom: 10px;
 }
 
 /* Masthead */
