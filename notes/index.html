@@ -6,8 +6,10 @@ title: Notes & Code
 <h2>{{ page.title }}</h2>
 <ul class="notes">
 
-  {% for post in site.notes %}
-    <li><span>{{ note.date | date_to_string }}</span> &raquo; <a href="{{ note.url }}" title="{{ note.title }}">{{ note.title }}</a></li>
+  {% for post in site.posts %}
+    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}
+      </a>
+  </li>
   {% endfor %}
     
 </ul>
