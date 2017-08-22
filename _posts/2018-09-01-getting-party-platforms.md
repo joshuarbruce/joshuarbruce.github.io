@@ -68,5 +68,51 @@ substr(as.character(head(content(my_corpus[['61620_1960']])), stringsAsFactors =
 </code>
 </pre>
 
+### Setting Up the Corpus for Analysis 
 
+Now that we know we have the *manifestoR* data for the US and can readily access it, we need to structure it for future analyses. While there are multiple ways of doing this, I set the corpus up as a data frame, which I find most straightforward for things like topic modeling or word count analysis. 
+
+This section of code builds the data frame to store information about the authoring political party and year for each platform document and extracts the platform text from the *manifestoR* package, adding it to the corresponding data frame column and row. 
+
+```r
+# Make data frame to store platforms and account for year and party
+  # We know to add 30 rows because this covers 15 years for 2 political parties.
+  # Adjust the number of rows if adding more years. 
+platform_data_frame <- as.data.frame(matrix(nrow = 30, ncol = 4)) 
+colnames(platform_data_frame)[1] <- 'year'
+colnames(platform_data_frame)[2] <- 'party'
+colnames(platform_data_frame)[3] <- 'party_id'
+colnames(platform_data_frame)[4] <- 'platform'
+
+# label party affiliation
+platform_data_frame$party[1:15] <- 'r' # Republicans
+platform_data_frame$party[16:30] <- 'd' # Democrats 
+
+# numeric lookup id's for manifestoR package
+platform_data_frame$party_id[1:15] <- '61620' # Republican ID number used in manifestoR
+platform_data_frame$party_id[16:30] <- '61320' # Democrat ID number used in manifestoR
+
+# years covered 
+years <- c('1960', '1964', '1968', '1972','1976', '1980','1984','1988','1992','1996','2000','2004','2008','2012','2016')
+
+# assign years to rows
+for(i in 1:length(years)){
+  platform_data_frame$year[i] <- as.character(years[i])
+  platform_data_frame$year[(i+15)] <- as.character(years[i])
+}
+
+# pull party platforms from manifestoR package and store in data frame
+for(i in 1:nrow(platform_data_frame)){
+  try(
+    platform_data_frame$platform[i] <- as.character(head(content(
+    my_corpus[[paste0(platform_data_frame$party_id[i],'_',platform_data_frame$year[i])]]))[1], 
+    stringsAsFactors = F)
+    )
+}
+```
+
+When you run this script, you should get two errors that look like the following:
+
+> Error in UseMethod("content", x) : 
+  no applicable method for 'content' applied to an object of class "NULL"
 
