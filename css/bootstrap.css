@@ -658,7 +658,7 @@ blockquote p:last-child {
 blockquote small {
   display: block;
   line-height: 1.428571429;
-  color: #999999;
+  color: inherit;
 }
 
 blockquote small:before {
