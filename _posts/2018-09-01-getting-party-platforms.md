@@ -175,9 +175,132 @@ subset(platform_data_frame, select = c(year, party, original_doc_length))
 ## 29 2012     d                1395
 ## 30 2016     d                   0
 ```
+Sure enough, while most are single text strings (i.e., the original document is a single piece), the 1992 Democratic platform is in 444 parts. Seven of the 28 platform documents included in the manifestoR package are not single text strings. To correct this, we can make data frames out of each of these seven entries (they include more than just the text of the documents, if you’re curious), collapse the column containing the individual pieces, and add the whole string to our platform data frame.
 
+```r
+# Make data frames, collapse text pieces, insert into platform_data_frame
+for(i in 1:nrow(platform_data_frame)){
+  # loop through every row checking for multi-part docs
+  if(platform_data_frame$original_doc_length[i] > 1){ 
+    # make data frame for each document record 
+    text_pieces <- as.data.frame(my_corpus[[(paste0(
+      platform_data_frame$party_id[i],'_',platform_data_frame$year[i]
+    ))]])
+    platform_data_frame$platform[i] <- paste(c(text_pieces[,1]), collapse = ' ')
+    # we collapse the first column because that contains the individual sentences from the platforms
+  }
+}
+```
 
+Rather than print out each individual document (which you should do yourself to really check for completeness), we can instead look at the number of characters in each doc to make sure they are more than just the first sentences.
 
+```r
+as.data.frame(nchar(platform_data_frame$platform[1:30]))
+```
+```
+##    nchar(platform_data_frame$platform[1:30])
+## 1                                      69857
+## 2                                      57608
+## 3                                      66688
+## 4                                     156434
+## 5                                     132209
+## 6                                     225417
+## 7                                     179817
+## 8                                     232544
+## 9                                     183804
+## 10                                    177839
+## 11                                    225012
+## 12                                    267806
+## 13                                    299979
+## 14                                    203194
+## 15                                        NA
+## 16                                    104733
+## 17                                     32946
+## 18                                    107881
+## 19                                    165890
+## 20                                    139585
+## 21                                    250128
+## 22                                    280974
+## 23                                     31431
+## 24                                     54845
+## 25                                    100932
+## 26                                    150167
+## 27                                    111150
+## 28                                    164626
+## 29                                    160726
+## 30                                        NA
+```
+Looks like everything worked well! Now we can turn to getting the 2016 platform texts...
+
+#### Getting 2016 Platform Text
+
+As noted above, the 2016 platforms are not yet included in the *manifestoR* package. However, they are both available from the UC Santa Barbara American Presidency Project website. 
+
+```r
+# load packages
+require(rvest)
+require(XML)
+```
+##### Republican Platform
+
+```r
+# Get HTML from the UCSB American Presidency webiste with 2016 Republican platform
+ucsb_gop_2016_platform_url <- read_html('http://www.presidency.ucsb.edu/ws/index.php?pid=117718')
+
+# parse HTML
+ucsb_gop_2016_platform_parsed <- htmlParse(ucsb_gop_2016_platform_url)
+
+# extract portion with the text 
+text_gop_2016_platform <- xpathSApply(ucsb_gop_2016_platform_parsed, '//table', xmlValue)[1]
+
+# look at the beginning of the text 
+substr(text_gop_2016_platform, 1, 1000)
+```
+```
+## [1] " \r\n\t\t\r\n        \n        \n        \n        \n        \n        \n        \n        \n      \n  \n  \n        \n        \n        \n        \n        \n        \n        \n      \n  \r\n\t\t\r\n\t\t \r\n\t\r\n\t\t\r\n\t\t\r\n      \r\n      Document Archive\r\n      • Public Papers of the Presidents\r\n      • State of the Union\r\n          Addresses & Messages\r\n      • Inaugural Addresses\r\n      • Weekly  Addresses\r\n      • Fireside Chats\r\n      • News Conferences\r\n      • Executive Orders\r\n      • Proclamations\r\n      • Signing Statements\r\n      • Press Briefings \r\n      • Statements of\r\n           Administration Policy\r\n      • Economic Report of the President\r\n      • Debates\r\n      • Convention Speeches\r\n      • Party Platforms\r\n      • 2016 Election Documents\r\n      • 2012 Election Documents \r\n      • 2008 Election Documents \r\n      • 2004 Election Documents \r\n      • 1960 Election Documents \r\n      • 2009 Transition\r\n      • 2001 Transition\r\n      Data Archive \r\n      Data Index\r\n      Media Archive\r\n      Audio/Video Index"
+```
+As we can see, the text is a mess because we scraped more than just the platform contents. (I tried narrowing it down using a more precise XML path, but no luck.) Thankfully, we can easily see locations in the text where we can delete everything before and after to reduce the text to just the platform document.
+
+```r
+# First, lets get rid of everything before the Preamble
+text_gop_2016_platform <- gsub(".*Preamble", "", text_gop_2016_platform)
+
+# Taking a look, it seems like this cleared out everything at the beginning. 
+# However, the end of the file is still a mess.
+substr(text_gop_2016_platform, 1, 1000)
+```
+```
+## [1] "With this platform, we the Republican Party reaffirm the principles that unite us in a common purpose.We believe in American exceptionalism.We believe the United States of America is unlike any other nation on earth.We believe America is exceptional because of our historic role — first as refuge, then as defender, and now as exemplar of liberty for the world to see.We affirm — as did the Declaration of Independence: that all are created equal, endowed by their Creator with inalienable rights of life, liberty, and the pursuit of happiness.We believe in the Constitution as our founding document.We believe the Constitution was written not as a flexible document, but as our enduring covenant. We believe our constitutional system — limited government, separation of powers, federalism, and the rights of the people — must be preserved uncompromised for future generations.We believe political freedom and economic freedom are indivisible.When political freedom and economic freedom are separated"
+```
+
+```r
+# To clear up the end of the file, this deletes everything after the phrase "The Platform Committee," 
+# which includes all of the signatories to the platform as well as any text following it.
+text_gop_2016_platform <- gsub("The Platform Committee.*", "", text_gop_2016_platform)
+
+# Take a look at the last 1,000 characters of the platform text now
+require(stringr)
+str_sub(text_gop_2016_platform, -1000)
+```
+```
+## [1] "technology must become a national priority in light of the way authoritarian governments such as China, Cuba, and Iran restrict free press and isolate their people limiting political, cultural, and religious freedom. Leaders of authoritarian governments argue that governments have the same legal right to control internet access as they do to control migrant access. A focus on internet freedom is a cost-effective means of peacefully advancing fundamental freedoms in closed and authoritarian societies. But it is also an important economic interest, as censorship constitutes a trade barrier for U.S. companies operating in societies like China with advanced firewall protection policies. A Republican administration will champion an open and free internet based on principles of free expression and universal values and will pursue policies to empower citizens and U.S. companies operating in authoritarian countries to circumvent internet firewalls and gain accurate news and information online."
+```
+```r
+# You can see the whole document now contains only the corrected text.
+# text_gop_2016_platform
+```
+
+Finally, add the full, cleaned text of the 2016 GOP platform to the data frame we created earlier. Make sure you look up the correct row index number for the 2016 Republican platform if you changed anything in the preceding code.
+
+```{r}
+platform_data_frame$platform[15] <- text_gop_2016_platform
+
+# make sure the correct text was loaded
+substr(platform_data_frame$platform[15], 1, 100)
+```
+```
+## [1] "With this platform, we the Republican Party reaffirm the principles that unite us in a common purpos"
+```
 
 
 
