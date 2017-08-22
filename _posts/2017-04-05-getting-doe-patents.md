@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: notes
 title: Collecting Dept. of Energy-Supported Patents
 date: 2017-04-05
 ---
