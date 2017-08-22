@@ -22,7 +22,9 @@ To get the API key, do the following:
   
   * Copy the API key into the code below where it reads _YOUR-API-KEY-HERE_. 
 
-``` r
+<?prettify?>
+<pre class="prettyprint lang-r">
+
 # Note, if you do not already have them installed, this script requires the following 
 # packages in addition to manifestoR:
     # XML, rvest, stringr
@@ -37,7 +39,7 @@ require(manifestoR)
 
 # Create a corpus of all U.S. documents (since 1960)
 my_corpus <- mp_corpus(countryname == 'United States')
-```
+</pre>
 
 With the package loaded and the US platform corpus created, we can now look at individual party platforms. Let's take a look at the beginning lines in the Democratic and Republican platforms of 1960.
 
