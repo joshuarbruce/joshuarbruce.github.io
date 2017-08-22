@@ -77,9 +77,9 @@ iframe {font-family: 'Merriweather', Georgia, Times; font-size: 16px;}
 .guide .notes { font-size: 12px; }
 .guide .notes h2 { font-size: 14px; }
 
-<!--
+
 /* Code */
-pre.prettyprint { padding: 10px !important; margin: 40px; font-size: 12px;}
+/* pre.prettyprint { padding: 10px !important; margin: 40px; font-size: 12px;}
 
 .step { border-radius: 50%; 
 	-moz-border-radius: 50%; 
@@ -94,7 +94,7 @@ pre.prettyprint { padding: 10px !important; margin: 40px; font-size: 12px;}
 	padding-top: 5.5px;
 	margin: 5px 15px 0px 0px;
 	font-family: 'Montserrat', Helvetica, sans-serif; }
--->
+*/
 
 /* Create custom horizontal line */
 .customHr {
