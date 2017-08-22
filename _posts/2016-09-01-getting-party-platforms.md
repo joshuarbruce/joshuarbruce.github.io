@@ -24,7 +24,6 @@ To get the API key, do the following:
 
 <?prettify?>
 <pre class="prettyprint lang-r">
-
 # Note, if you do not already have them installed, this script requires the following 
 # packages in addition to manifestoR:
     # XML, rvest, stringr
@@ -43,21 +42,25 @@ my_corpus <- mp_corpus(countryname == 'United States')
 
 With the package loaded and the US platform corpus created, we can now look at individual party platforms. Let's take a look at the beginning lines in the Democratic and Republican platforms of 1960.
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 # Extract first 1,000 characters of the 1960 Democratic party platform
 substr(as.character(head(content(my_corpus[['61320_1960']])), stringsAsFactors = F), 1, 1000)
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] "In 1796, in America's first contested national election, our Party, under the leadership of Thomas Jefferson, campaigned on the principles of \"The Rights of Man\". Ever since, these four words have underscored our identity with the plain people of America and the world. In periods of national crises we Democrats have returned to these words for renewed strength. We return to them today. In 1960, \"The Rights of Man\" are still the issue. It is our continuing responsibility to provide an effective instrument of political action for every American who seeks to strengthen these rights everywhere here in America, and everywhere in our 20th Century world. The common danger of mankind is war and the threat of war. Today, three billion human beings live in fear that some rash act or blunder may plunge us all into a nuclear holocaust which will leave only ruined cities, blasted homes, and a poisoned earth and sky. Our objective, however, is not the right to coexist in armed camps on the same plan"
-```
+</pre>
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 # Extract first 1,000 characters of the 1960 Republican party platform
 substr(as.character(head(content(my_corpus[['61620_1960']])), stringsAsFactors = F), 1, 1000)
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] "PREAMBLE The United States is living in an age of profoundest revolution. The lives of men and of nations are undergoing such transformations as history has rarely recorded. The birth of new nations, the impact of new machines, the threat of new weapons, the stirring of new ideas, the ascent into a new dimension of the universe, everywhere the accent falls on the new. At such a time of world upheaval, great perils match great opportunities and hopes, as well as fears, rise in all areas of human life. Such a force as nuclear power symbolizes the greatness of the choice before the United States and mankind. The energy of the atom could bring devastation to humanity. Or it could be made to serve men's hopes for peace and progress to make for all peoples a more healthy and secure and prosperous life than man has ever known. One fact darkens the reasonable hopes of free men, the growing vigor and thrust of Communist imperialism. Everywhere across the earth, this force challenges us to prove"
-```
+</pre>
 
 ### Setting Up the Corpus for Analysis 
 
@@ -65,7 +68,8 @@ Now that we know we have the *manifestoR* data for the US and can readily access
 
 This section of code builds the data frame to store information about the authoring political party and year for each platform document and extracts the platform text from the *manifestoR* package, adding it to the corresponding data frame column and row. 
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 # Make data frame to store platforms and account for year and party
   # We know to add 30 rows because this covers 15 years for 2 political parties.
   # Adjust the number of rows if adding more years. 
@@ -100,7 +104,7 @@ for(i in 1:nrow(platform_data_frame)){
     stringsAsFactors = F)
     )
 }
-```
+</pre>
 
 When you run this script, you should get two errors that look like the following:
 
@@ -109,18 +113,21 @@ When you run this script, you should get two errors that look like the following
 
 This is because the *manifestoR* package doesn't (at the time of writing, July 2016) include the 2016 platform texts. We'll address that next, but before going on, make sure to look at your data frame and ensure the text is there for earlier documents. To spot check, let's look at the entire 1992 Democratic platform.
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 platform_data_frame$platform[which(
   platform_data_frame$year == 1992 & 
     platform_data_frame$party == 'd')]
-```
-```
+</pre?
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] "A New Covenant with the American People"
-```
+</pre>
 
 That doesn't look quite right... Turns out, the *manifestoR* package structures some platforms as one long text string, while other years are broken apart by sentence. To see how each is structured, we'll add a column to the platform data frame that tells us how many pieces the original text came in.
 
-```{r}
+<?prettify?>
+<pre class="prettyprint lang-r">
 # make column for length and add to data frame 
 platform_data_frame$original_doc_length <- ''
 
@@ -131,13 +138,15 @@ for(i in 1:nrow(platform_data_frame)){
 
 ## An alternative would be to look at the number of characters in each document in the platform data 
 ## frame using the 'nchar()' command.
-```
+</pre>
 
-```{r}
+<?prettify?>
+<pre class="prettyprint lang-r">
 # Looking at year, party, and number of platform components:
 subset(platform_data_frame, select = c(year, party, original_doc_length))
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ##    year party original_doc_length
 ## 1  1960     r                   1
 ## 2  1964     r                   1
@@ -169,10 +178,11 @@ subset(platform_data_frame, select = c(year, party, original_doc_length))
 ## 28 2008     d                1216
 ## 29 2012     d                1395
 ## 30 2016     d                   0
-```
+</pre>
 Sure enough, while most are single text strings (i.e., the original document is a single piece), the 1992 Democratic platform is in 444 parts. Seven of the 28 platform documents included in the manifestoR package are not single text strings. To correct this, we can make data frames out of each of these seven entries (they include more than just the text of the documents, if you’re curious), collapse the column containing the individual pieces, and add the whole string to our platform data frame.
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 # Make data frames, collapse text pieces, insert into platform_data_frame
 for(i in 1:nrow(platform_data_frame)){
   # loop through every row checking for multi-part docs
@@ -185,14 +195,16 @@ for(i in 1:nrow(platform_data_frame)){
     # we collapse the first column because that contains the individual sentences from the platforms
   }
 }
-```
+</pre>
 
 Rather than print out each individual document (which you should do yourself to really check for completeness), we can instead look at the number of characters in each doc to make sure they are more than just the first sentences.
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 as.data.frame(nchar(platform_data_frame$platform[1:30]))
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ##    nchar(platform_data_frame$platform[1:30])
 ## 1                                      69857
 ## 2                                      57608
@@ -224,21 +236,23 @@ as.data.frame(nchar(platform_data_frame$platform[1:30]))
 ## 28                                    164626
 ## 29                                    160726
 ## 30                                        NA
-```
+</pre>
 Looks like everything worked well! Now we can turn to getting the 2016 platform texts...
 
 ### Getting 2016 Platform Text
 
 As noted above, the 2016 platforms are not yet included in the *manifestoR* package. However, they are both available from the UC Santa Barbara American Presidency Project website. 
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 # load packages
 require(rvest)
 require(XML)
-```
+</pre>
 #### Republican Platform
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 # Get HTML from the UCSB American Presidency webiste with 2016 Republican platform
 ucsb_gop_2016_platform_url <- read_html('http://www.presidency.ucsb.edu/ws/index.php?pid=117718')
 
@@ -250,25 +264,29 @@ text_gop_2016_platform <- xpathSApply(ucsb_gop_2016_platform_parsed, '//table', 
 
 # look at the beginning of the text 
 substr(text_gop_2016_platform, 1, 1000)
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] " \r\n\t\t\r\n        \n        \n        \n        \n        \n        \n        \n        \n      \n  \n  \n        \n        \n        \n        \n        \n        \n        \n      \n  \r\n\t\t\r\n\t\t \r\n\t\r\n\t\t\r\n\t\t\r\n      \r\n      Document Archive\r\n      • Public Papers of the Presidents\r\n      • State of the Union\r\n          Addresses & Messages\r\n      • Inaugural Addresses\r\n      • Weekly  Addresses\r\n      • Fireside Chats\r\n      • News Conferences\r\n      • Executive Orders\r\n      • Proclamations\r\n      • Signing Statements\r\n      • Press Briefings \r\n      • Statements of\r\n           Administration Policy\r\n      • Economic Report of the President\r\n      • Debates\r\n      • Convention Speeches\r\n      • Party Platforms\r\n      • 2016 Election Documents\r\n      • 2012 Election Documents \r\n      • 2008 Election Documents \r\n      • 2004 Election Documents \r\n      • 1960 Election Documents \r\n      • 2009 Transition\r\n      • 2001 Transition\r\n      Data Archive \r\n      Data Index\r\n      Media Archive\r\n      Audio/Video Index"
-```
+</pre>
 As we can see, the text is a mess because we scraped more than just the platform contents. (I tried narrowing it down using a more precise XML path, but no luck.) Thankfully, we can easily see locations in the text where we can delete everything before and after to reduce the text to just the platform document.
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 # First, lets get rid of everything before the Preamble
 text_gop_2016_platform <- gsub(".*Preamble", "", text_gop_2016_platform)
 
 # Taking a look, it seems like this cleared out everything at the beginning. 
 # However, the end of the file is still a mess.
 substr(text_gop_2016_platform, 1, 1000)
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] "With this platform, we the Republican Party reaffirm the principles that unite us in a common purpose.We believe in American exceptionalism.We believe the United States of America is unlike any other nation on earth.We believe America is exceptional because of our historic role — first as refuge, then as defender, and now as exemplar of liberty for the world to see.We affirm — as did the Declaration of Independence: that all are created equal, endowed by their Creator with inalienable rights of life, liberty, and the pursuit of happiness.We believe in the Constitution as our founding document.We believe the Constitution was written not as a flexible document, but as our enduring covenant. We believe our constitutional system — limited government, separation of powers, federalism, and the rights of the people — must be preserved uncompromised for future generations.We believe political freedom and economic freedom are indivisible.When political freedom and economic freedom are separated"
-```
+</pre>
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 # To clear up the end of the file, this deletes everything after the phrase "The Platform Committee," 
 # which includes all of the signatories to the platform as well as any text following it.
 text_gop_2016_platform <- gsub("The Platform Committee.*", "", text_gop_2016_platform)
@@ -276,31 +294,36 @@ text_gop_2016_platform <- gsub("The Platform Committee.*", "", text_gop_2016_pla
 # Take a look at the last 1,000 characters of the platform text now
 require(stringr)
 str_sub(text_gop_2016_platform, -1000)
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] "technology must become a national priority in light of the way authoritarian governments such as China, Cuba, and Iran restrict free press and isolate their people limiting political, cultural, and religious freedom. Leaders of authoritarian governments argue that governments have the same legal right to control internet access as they do to control migrant access. A focus on internet freedom is a cost-effective means of peacefully advancing fundamental freedoms in closed and authoritarian societies. But it is also an important economic interest, as censorship constitutes a trade barrier for U.S. companies operating in societies like China with advanced firewall protection policies. A Republican administration will champion an open and free internet based on principles of free expression and universal values and will pursue policies to empower citizens and U.S. companies operating in authoritarian countries to circumvent internet firewalls and gain accurate news and information online."
-```
-```r
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 # You can see the whole document now contains only the corrected text.
 # text_gop_2016_platform
-```
+</pre>
 
 Finally, add the full, cleaned text of the 2016 GOP platform to the data frame we created earlier. Make sure you look up the correct row index number for the 2016 Republican platform if you changed anything in the preceding code.
 
-```{r}
+<?prettify?>
+<pre class="prettyprint lang-r">
 platform_data_frame$platform[15] <- text_gop_2016_platform
 
 # make sure the correct text was loaded
 substr(platform_data_frame$platform[15], 1, 100)
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] "With this platform, we the Republican Party reaffirm the principles that unite us in a common purpos"
-```
+</pre>
 #### Democratic Platform
 
 We'll now replicate the same process for the 2016 Democratic platform.
 
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 # Get HTML from the UCSB American Presidency webiste with 2016 Democratic platform
 ucsb_dem_2016_platform_url <- read_html('http://www.presidency.ucsb.edu/ws/index.php?pid=117717')
 
@@ -312,34 +335,42 @@ text_dem_2016_platform <- xpathSApply(ucsb_dem_2016_platform_parsed, '//table', 
 
 # take a look at the beginning of the text
 substr(text_dem_2016_platform, 1, 1000)
-```
-```
+</pre>
+
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] " \r\n\t\t\r\n        \n        \n        \n        \n        \n        \n        \n        \n      \n  \n  \n        \n        \n        \n        \n        \n        \n        \n      \n  \r\n\t\t\r\n\t\t \r\n\t\r\n\t\t\r\n\t\t\r\n      \r\n      Document Archive\r\n      • Public Papers of the Presidents\r\n      • State of the Union\r\n          Addresses & Messages\r\n      • Inaugural Addresses\r\n      • Weekly  Addresses\r\n      • Fireside Chats\r\n      • News Conferences\r\n      • Executive Orders\r\n      • Proclamations\r\n      • Signing Statements\r\n      • Press Briefings \r\n      • Statements of\r\n           Administration Policy\r\n      • Economic Report of the President\r\n      • Debates\r\n      • Convention Speeches\r\n      • Party Platforms\r\n      • 2016 Election Documents\r\n      • 2012 Election Documents \r\n      • 2008 Election Documents \r\n      • 2004 Election Documents \r\n      • 1960 Election Documents \r\n      • 2009 Transition\r\n      • 2001 Transition\r\n      Data Archive \r\n      Data Index\r\n      Media Archive\r\n      Audio/Video Index"
-```
+</pre>
+
 As with the Republic text, there are extraneous characters at the beginning and end of the file. Looking at the webpage, it looks like we can get rid of everything before the "Preamble" and after "Citation."
  
-```r
+<?prettify?>
+<pre class="prettyprint lang-r">
 # First, lets get rid of everything before the Preamble
 text_dem_2016_platform <- gsub(".*Preamble", "", text_dem_2016_platform)
 
 # Look at the beginning of the text now to make sure it did clean things up
 substr(text_dem_2016_platform, 1, 1000)
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] "In 2016, Democrats meet in Philadelphia with the same basic belief that animated the Continental Congress when they gathered here 240 years ago: Out of many, we are one. Under President Obama's leadership, and thanks to the hard work and determination of the American people, we have come a long way from the Great Recession and the Republican policies that triggered it. American businesses have now added 14.8 million jobs since private-sector job growth turned positive in early 2010. Twenty million people have gained health insurance coverage. The American auto industry just had its best year ever. And we are getting more of our energy from the sun and wind, and importing less oil from overseas. But too many Americans have been left out and left behind. They are working longer hours with less security. Wages have barely budged and the racial wealth gap remains wide, while the cost of everything from childcare to a college education has continued to rise. And for too many families, the d"
-```
-```r
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 # Delete everything after the word "Citation" at the end of the document
 text_dem_2016_platform <- gsub("Citation.*", "", text_dem_2016_platform)
 
 # Take a look at the last 1,000 characters of the platform text now
 require(stringr)
 str_sub(text_dem_2016_platform, -1000)
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] "Africa, including stronger regulations banning the importation into the United States of hunting trophies that are not supported by current science-based evidence and are related to or funded by non-scientific special interests. Global Economy and InstitutionsDemocrats will protect and grow the global economy. While Donald Trump wants to default on our debt, which would lead to a disastrous global economic crisis, we believe we must be responsible stewards and work with our partners to prevent another worldwide financial crisis. Democrats believe that global institutions—most prominently the United Nations—and multilateral organizations have a powerful role to play and are an important amplifier of American strength and influence. Many of these organizations need reform and updating, but it would be reckless to follow Donald Trump and turn our back on the international system that our country built. It has provided decades of stability and economic growth for the world and for America."
-```
-```r
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 # You can see the whole document now contains only the corrected text.
 # text_dem_2016_platform
 
@@ -348,10 +379,11 @@ platform_data_frame$platform[30] <- text_dem_2016_platform
 
 # make sure the correct text was loaded
 substr(platform_data_frame$platform[30], 1, 100)
-```
-```
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## [1] "In 2016, Democrats meet in Philadelphia with the same basic belief that animated the Continental Con"
-```
+</pre>
 ### End Note
 
 We now have a complete data frame with all Republican and Democratic party platforms from 1960 to 2016. If you're interested in going farther back, the same processes can be used on the American Presidency Project webpages for each year and party that you're interested in. 
