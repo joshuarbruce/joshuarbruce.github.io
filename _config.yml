@@ -3,4 +3,3 @@ markdown: kramdown
 url: https://joshuarbruce.com
 enforce_ssl: joshuarbruce.com
 google_analytics_tracking_id: UA-92164651-1
-highlighter: rogue
