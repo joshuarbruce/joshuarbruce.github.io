@@ -23,7 +23,7 @@ To get the API key, do the following:
   * Copy the API key into the code below where it reads _YOUR-API-KEY-HERE_. 
 
 <?prettify?>
-<pre class="prettyprint" lang=r>
+<pre class="prettyprint" lang="lang-r">
 # Note, if you do not already have them installed, this script requires the following 
 # packages in addition to manifestoR:
     # XML, rvest, stringr
