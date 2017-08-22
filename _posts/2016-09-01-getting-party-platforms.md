@@ -118,7 +118,7 @@ This is because the *manifestoR* package doesn't (at the time of writing, July 2
 platform_data_frame$platform[which(
   platform_data_frame$year == 1992 & 
     platform_data_frame$party == 'd')]
-</pre?
+</pre>
 <?prettify?>
 <pre class="prettyprint lang-r">
 ## [1] "A New Covenant with the American People"
