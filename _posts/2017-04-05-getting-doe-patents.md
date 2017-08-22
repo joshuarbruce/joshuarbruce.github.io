@@ -8,14 +8,14 @@ This short guide illustrates how to collect information on patents supported by 
 
 To begin, you'll need to <code>require</code> the R libraries <a href="https://cran.r-project.org/web/packages/XML/index.html" target = "blank">XML</a> and <a href="https://cran.r-project.org/web/packages/xml2/index.html" target="blank">xml2</a>. 
 
-```
+```{r}
 require(XML)
 require(xml2)
 ```
 
 These packages make it simple to download and reformat the raw <a href="https://en.wikipedia.org/wiki/XML" target="blank">XML files</a> from the DoE API. To get a sense of what this data looks like, we can download and inspect a single record. The base text of the API call is: <code>ht<i></i>tps://ww<i></i>w.osti.g<i></i>ov/doepatents/doepatentsxml?</code>, to which we add <code>nrows=1&page=0</code>, telling the API we only want the first result of however many pages are avaialable. In order to make sense of the results, we will also parse the XML results...
 
-```r
+```{r}
 xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'))
 ```
 
@@ -63,7 +63,7 @@ xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'
 
 We can thus see what the variables are in this dataset; there are 29 of them total. The value we're most interested in is the <code>identifierReport</code> field, which includes the patent number. I find converting the XML results to a list makes it more easily explorable, which we do with the <code>xmlToList()</code> command.
 
-```r
+```{r}
 result_as_list <- xmlToList(xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0')))
 ```
 
@@ -73,13 +73,13 @@ In addition to this record's information, the results also tell us how many tota
 
 To collect the whole dataset, I begin by constructing a dataframe to hold all of the records.
 
-```r
+```{r}
 energy_records <- as.data.frame(matrix(nrow = 37220, ncol = 29))
 ```
 
 We can then add the variable names from our list to the <code>energy_records</code> dataframe, as follows.
 
-```r
+```{r}
 # Add variable names to data frame
 for(i in 1:ncol(energy_records)){
   colnames(energy_records)[i] <- names(result_as_list$records[[1]])[i]
@@ -88,7 +88,7 @@ for(i in 1:ncol(energy_records)){
 
 Having created a dataframe to store the whole DoE database (as it exists at the time of data collection), a loop can be used to iteratively call the DoE API, transform the XML results, and place the relevant information in the corresponding columns of the <code>energy_records</code> dataframe. I have broken apart the XML processing steps to better understand any errors that emerge while the loop is running, but this isn't necessary. Note that I have changed the number of records returned per page to 3000, the maximum allowed by the API. Given the 37,000+ records, we need to run the call 13 times to get all results, leading to <code>for(k in 0:12)</code> in the first line of code.
 
-```r
+```{r}
 # Loop to get all DoE records 
 for(k in 0:12){
   step1 <- read_xml(paste0('https://www.osti.gov/doepatents/doepatentsxml?nrows=3000&page=',k))
