@@ -265,6 +265,7 @@ text_gop_2016_platform <- xpathSApply(ucsb_gop_2016_platform_parsed, '//table', 
 # look at the beginning of the text 
 substr(text_gop_2016_platform, 1, 1000)
 </pre>
+
 <?prettify?>
 <pre class="prettyprint lang-r">
 ## [1] " \r\n\t\t\r\n        \n        \n        \n        \n        \n        \n        \n        \n      \n  \n  \n        \n        \n        \n        \n        \n        \n        \n      \n  \r\n\t\t\r\n\t\t \r\n\t\r\n\t\t\r\n\t\t\r\n      \r\n      Document Archive\r\n      • Public Papers of the Presidents\r\n      • State of the Union\r\n          Addresses & Messages\r\n      • Inaugural Addresses\r\n      • Weekly  Addresses\r\n      • Fireside Chats\r\n      • News Conferences\r\n      • Executive Orders\r\n      • Proclamations\r\n      • Signing Statements\r\n      • Press Briefings \r\n      • Statements of\r\n           Administration Policy\r\n      • Economic Report of the President\r\n      • Debates\r\n      • Convention Speeches\r\n      • Party Platforms\r\n      • 2016 Election Documents\r\n      • 2012 Election Documents \r\n      • 2008 Election Documents \r\n      • 2004 Election Documents \r\n      • 1960 Election Documents \r\n      • 2009 Transition\r\n      • 2001 Transition\r\n      Data Archive \r\n      Data Index\r\n      Media Archive\r\n      Audio/Video Index"
@@ -280,6 +281,7 @@ text_gop_2016_platform <- gsub(".*Preamble", "", text_gop_2016_platform)
 # However, the end of the file is still a mess.
 substr(text_gop_2016_platform, 1, 1000)
 </pre>
+
 <?prettify?>
 <pre class="prettyprint lang-r">
 ## [1] "With this platform, we the Republican Party reaffirm the principles that unite us in a common purpose.We believe in American exceptionalism.We believe the United States of America is unlike any other nation on earth.We believe America is exceptional because of our historic role — first as refuge, then as defender, and now as exemplar of liberty for the world to see.We affirm — as did the Declaration of Independence: that all are created equal, endowed by their Creator with inalienable rights of life, liberty, and the pursuit of happiness.We believe in the Constitution as our founding document.We believe the Constitution was written not as a flexible document, but as our enduring covenant. We believe our constitutional system — limited government, separation of powers, federalism, and the rights of the people — must be preserved uncompromised for future generations.We believe political freedom and economic freedom are indivisible.When political freedom and economic freedom are separated"
