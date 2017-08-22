@@ -321,7 +321,7 @@ substr(text_dem_2016_platform, 1, 1000)
 ```
 As with the Republic text, there are extraneous characters at the beginning and end of the file. Looking at the webpage, it looks like we can get rid of everything before the "Preamble" and after "Citation."
  
-```{r eval=T, message=F}
+```r
 # First, lets get rid of everything before the Preamble
 text_dem_2016_platform <- gsub(".*Preamble", "", text_dem_2016_platform)
 
