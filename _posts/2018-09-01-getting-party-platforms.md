@@ -4,8 +4,6 @@ title: Collecting US Political Party Platform Texts (Using R)
 date: 2016-09-01
 ---
 
-### Getting Started
-
 This post discusses how to collect the full text of every Democratic and Republican political party platform since the 1960 political conventions. The data are readily available, including the full-text of the Democratic and Republican party platforms back to 1864 (and earlier for other parties), from UC Santa Barbara's [American Presidency Project](http://www.presidency.ucsb.edu/platforms.php). 
 
 Full-text of party platform documents from 1960 forward are also available through the [*manifestoR*](https://manifesto-project.wzb.eu/information/documents/manifestoR) package, which I use below. The *manifestoR* package was created by the [Manifesto Project](https://manifesto-project.wzb.eu/) and is supported by the [WZB Berlin Social Science Center](https://www.wzb.eu/en) and the [German Research Foundation](http://www.dfg.de/en/index.jsp). 
@@ -232,7 +230,7 @@ as.data.frame(nchar(platform_data_frame$platform[1:30]))
 ```
 Looks like everything worked well! Now we can turn to getting the 2016 platform texts...
 
-#### Getting 2016 Platform Text
+### Getting 2016 Platform Text
 
 As noted above, the 2016 platforms are not yet included in the *manifestoR* package. However, they are both available from the UC Santa Barbara American Presidency Project website. 
 
@@ -241,7 +239,7 @@ As noted above, the 2016 platforms are not yet included in the *manifestoR* pack
 require(rvest)
 require(XML)
 ```
-##### Republican Platform
+#### Republican Platform
 
 ```r
 # Get HTML from the UCSB American Presidency webiste with 2016 Republican platform
@@ -301,6 +299,66 @@ substr(platform_data_frame$platform[15], 1, 100)
 ```
 ## [1] "With this platform, we the Republican Party reaffirm the principles that unite us in a common purpos"
 ```
+#### Democratic Platform
+
+We'll now replicate the same process for the 2016 Democratic platform.
+
+```r
+# Get HTML from the UCSB American Presidency webiste with 2016 Democratic platform
+ucsb_dem_2016_platform_url <- read_html('http://www.presidency.ucsb.edu/ws/index.php?pid=117717')
+
+# parse HTML
+ucsb_dem_2016_platform_parsed <- htmlParse(ucsb_dem_2016_platform_url)
+
+# extract portion with the text 
+text_dem_2016_platform <- xpathSApply(ucsb_dem_2016_platform_parsed, '//table', xmlValue)[1]
+
+# take a look at the beginning of the text
+substr(text_dem_2016_platform, 1, 1000)
+```
+```
+## [1] " \r\n\t\t\r\n        \n        \n        \n        \n        \n        \n        \n        \n      \n  \n  \n        \n        \n        \n        \n        \n        \n        \n      \n  \r\n\t\t\r\n\t\t \r\n\t\r\n\t\t\r\n\t\t\r\n      \r\n      Document Archive\r\n      • Public Papers of the Presidents\r\n      • State of the Union\r\n          Addresses & Messages\r\n      • Inaugural Addresses\r\n      • Weekly  Addresses\r\n      • Fireside Chats\r\n      • News Conferences\r\n      • Executive Orders\r\n      • Proclamations\r\n      • Signing Statements\r\n      • Press Briefings \r\n      • Statements of\r\n           Administration Policy\r\n      • Economic Report of the President\r\n      • Debates\r\n      • Convention Speeches\r\n      • Party Platforms\r\n      • 2016 Election Documents\r\n      • 2012 Election Documents \r\n      • 2008 Election Documents \r\n      • 2004 Election Documents \r\n      • 1960 Election Documents \r\n      • 2009 Transition\r\n      • 2001 Transition\r\n      Data Archive \r\n      Data Index\r\n      Media Archive\r\n      Audio/Video Index"
+```
+As with the Republic text, there are extraneous characters at the beginning and end of the file. Looking at the webpage, it looks like we can get rid of everything before the "Preamble" and after "Citation."
+ 
+```{r eval=T, message=F}
+# First, lets get rid of everything before the Preamble
+text_dem_2016_platform <- gsub(".*Preamble", "", text_dem_2016_platform)
+
+# Look at the beginning of the text now to make sure it did clean things up
+substr(text_dem_2016_platform, 1, 1000)
+```
+```
+## [1] "In 2016, Democrats meet in Philadelphia with the same basic belief that animated the Continental Congress when they gathered here 240 years ago: Out of many, we are one. Under President Obama's leadership, and thanks to the hard work and determination of the American people, we have come a long way from the Great Recession and the Republican policies that triggered it. American businesses have now added 14.8 million jobs since private-sector job growth turned positive in early 2010. Twenty million people have gained health insurance coverage. The American auto industry just had its best year ever. And we are getting more of our energy from the sun and wind, and importing less oil from overseas. But too many Americans have been left out and left behind. They are working longer hours with less security. Wages have barely budged and the racial wealth gap remains wide, while the cost of everything from childcare to a college education has continued to rise. And for too many families, the d"
+```
+```r
+# Delete everything after the word "Citation" at the end of the document
+text_dem_2016_platform <- gsub("Citation.*", "", text_dem_2016_platform)
+
+# Take a look at the last 1,000 characters of the platform text now
+require(stringr)
+str_sub(text_dem_2016_platform, -1000)
+```
+```
+## [1] "Africa, including stronger regulations banning the importation into the United States of hunting trophies that are not supported by current science-based evidence and are related to or funded by non-scientific special interests. Global Economy and InstitutionsDemocrats will protect and grow the global economy. While Donald Trump wants to default on our debt, which would lead to a disastrous global economic crisis, we believe we must be responsible stewards and work with our partners to prevent another worldwide financial crisis. Democrats believe that global institutions—most prominently the United Nations—and multilateral organizations have a powerful role to play and are an important amplifier of American strength and influence. Many of these organizations need reform and updating, but it would be reckless to follow Donald Trump and turn our back on the international system that our country built. It has provided decades of stability and economic growth for the world and for America."
+```
+```r
+# You can see the whole document now contains only the corrected text.
+# text_dem_2016_platform
+
+# Put the text into the data frame row/column
+platform_data_frame$platform[30] <- text_dem_2016_platform
+
+# make sure the correct text was loaded
+substr(platform_data_frame$platform[30], 1, 100)
+```
+```
+## [1] "In 2016, Democrats meet in Philadelphia with the same basic belief that animated the Continental Con"
+```
+### End Note
+
+We now have a complete data frame with all Republican and Democratic party platforms from 1960 to 2016. If you're interested in going farther back, the same processes can be used on the American Presidency Project webpages for each year and party that you're interested in. 
+
 
 
 
