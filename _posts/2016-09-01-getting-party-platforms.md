@@ -23,11 +23,6 @@ To get the API key, do the following:
   * Copy the API key into the code below where it reads _YOUR-API-KEY-HERE_. 
 
 ```r
-require(manifestoR)
-mp_setapikey(key = '4b474084a30d9892716f2f6181dfa0bf')
-```
-
-```r
 # Note, if you do not already have them installed, this script requires the following 
 # packages in addition to manifestoR:
     # XML, rvest, stringr
