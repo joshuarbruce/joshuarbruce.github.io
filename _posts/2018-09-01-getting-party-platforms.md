@@ -52,21 +52,17 @@ With the package loaded and the US platform corpus created, we can now look at i
 # Extract first 1,000 characters of the 1960 Democratic party platform
 substr(as.character(head(content(my_corpus[['61320_1960']])), stringsAsFactors = F), 1, 1000)
 ```
-<pre class="prettyprint pre-scrollable">
-<code>
+```
 ## [1] "In 1796, in America's first contested national election, our Party, under the leadership of Thomas Jefferson, campaigned on the principles of \"The Rights of Man\". Ever since, these four words have underscored our identity with the plain people of America and the world. In periods of national crises we Democrats have returned to these words for renewed strength. We return to them today. In 1960, \"The Rights of Man\" are still the issue. It is our continuing responsibility to provide an effective instrument of political action for every American who seeks to strengthen these rights everywhere here in America, and everywhere in our 20th Century world. The common danger of mankind is war and the threat of war. Today, three billion human beings live in fear that some rash act or blunder may plunge us all into a nuclear holocaust which will leave only ruined cities, blasted homes, and a poisoned earth and sky. Our objective, however, is not the right to coexist in armed camps on the same plan"
-</code>
-</pre>
+```
 
 ```r
 # Extract first 1,000 characters of the 1960 Republican party platform
 substr(as.character(head(content(my_corpus[['61620_1960']])), stringsAsFactors = F), 1, 1000)
 ```
-<pre class="prettyprint pre-scrollable">
-<code>
+```
 ## [1] "PREAMBLE The United States is living in an age of profoundest revolution. The lives of men and of nations are undergoing such transformations as history has rarely recorded. The birth of new nations, the impact of new machines, the threat of new weapons, the stirring of new ideas, the ascent into a new dimension of the universe, everywhere the accent falls on the new. At such a time of world upheaval, great perils match great opportunities and hopes, as well as fears, rise in all areas of human life. Such a force as nuclear power symbolizes the greatness of the choice before the United States and mankind. The energy of the atom could bring devastation to humanity. Or it could be made to serve men's hopes for peace and progress to make for all peoples a more healthy and secure and prosperous life than man has ever known. One fact darkens the reasonable hopes of free men, the growing vigor and thrust of Communist imperialism. Everywhere across the earth, this force challenges us to prove"
-</code>
-</pre>
+```
 
 ### Setting Up the Corpus for Analysis 
 
@@ -115,4 +111,73 @@ When you run this script, you should get two errors that look like the following
 
 > Error in UseMethod("content", x) : 
   no applicable method for 'content' applied to an object of class "NULL"
+
+This is because the *manifestoR* package doesn't (at the time of writing, July 2016) include the 2016 platform texts. We'll address that next, but before going on, make sure to look at your data frame and ensure the text is there for earlier documents. To spot check, let's look at the entire 1992 Democratic platform.
+
+```r
+platform_data_frame$platform[which(
+  platform_data_frame$year == 1992 & 
+    platform_data_frame$party == 'd')]
+```
+```
+## [1] "A New Covenant with the American People"
+```
+
+That doesn't look quite right... Turns out, the *manifestoR* package structures some platforms as one long text string, while other years are broken apart by sentence. To see how each is structured, we'll add a column to the platform data frame that tells us how many pieces the original text came in.
+
+```{r}
+# make column for length and add to data frame 
+platform_data_frame$original_doc_length <- ''
+
+for(i in 1:nrow(platform_data_frame)){
+  platform_data_frame$original_doc_length[i] <-
+    length(my_corpus[[(paste0(platform_data_frame$party_id[i],'_',platform_data_frame$year[i]))]])
+}
+
+## An alternative would be to look at the number of characters in each document in the platform data 
+## frame using the 'nchar()' command.
+```
+
+```{r}
+# Looking at year, party, and number of platform components:
+subset(platform_data_frame, select = c(year, party, original_doc_length))
+```
+```
+##    year party original_doc_length
+## 1  1960     r                   1
+## 2  1964     r                   1
+## 3  1968     r                   1
+## 4  1972     r                   1
+## 5  1976     r                   1
+## 6  1980     r                   1
+## 7  1984     r                   1
+## 8  1988     r                   1
+## 9  1992     r                   1
+## 10 1996     r                   1
+## 11 2000     r                   1
+## 12 2004     r                1989
+## 13 2008     r                2308
+## 14 2012     r                1793
+## 15 2016     r                   0
+## 16 1960     d                   1
+## 17 1964     d                   1
+## 18 1968     d                   1
+## 19 1972     d                   1
+## 20 1976     d                   1
+## 21 1980     d                   1
+## 22 1984     d                   1
+## 23 1988     d                   1
+## 24 1992     d                 444
+## 25 1996     d                   1
+## 26 2000     d                   1
+## 27 2004     d                1000
+## 28 2008     d                1216
+## 29 2012     d                1395
+## 30 2016     d                   0
+```
+
+
+
+
+
 
