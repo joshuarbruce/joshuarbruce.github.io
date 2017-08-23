@@ -31,4 +31,17 @@ require(plyr)
 govt_assistance <- read.csv('fed_assistance_fy_2016.csv', stringsAsFactors = F)
 </pre>
 
-Having loaded the data, we can now start to see 
+Having loaded the data, we can now start to see where funding goes. Fist, by using <code>length(table(govt_assistance$principal_place_state_code))</code>, we can see there are 60 types of "states" that receive funding, indicating that non-state entities are included. I'm specifically interested in the 50 states, so I want to create a new data frame of just those records (I prefer to create new data frames rather than drop rows incase I make a mistake).
+
+To begin, I make a table of the places where federal funds go. This is a count of grants, of which there are several sub-types, to each of the 60 state entities. This table is useful, because it tells us states are identified by all-caps, two-letter abbreviations, which we can use to extract the records we want using R's built-in list of state abbreviations. 
+
+<?prettify?>
+<pre class="prettyprint lang-r">
+table_of_state_grants <- as.data.frame(table(
+govt_assistance$principal_place_state_code),
+stringsAsFactors = F)
+</pre>
+
+To do so, I create a list with the 50 state abbreviations in them, 
+
+
