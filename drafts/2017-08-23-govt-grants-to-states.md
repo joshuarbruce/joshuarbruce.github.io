@@ -10,7 +10,7 @@ As someone who does research on federal expenditures, and who is generally inter
 
 The data here are only for fiscal year 2016 (i.e., Oct. 1, 2015 - Sept. 30, 2016), but could easily be expanded back to at least FY 2000. The data are available from <a href="https://www.usaspending.gov" target="_blank">USASpending.gov</a>, a repository of all spending on contracts, grants, and other forms of assistance provided by the federal government. I specifically look at <a href="https://www.grants.gov/web/grants/learn-grants/grants-101.html" target="_blank">grants</a>, not contracts, which include most forms of non-contractual assistance from the government to non-federal entities, such as food stamps and research grants. 
 
-To download the data, which I call <code>govt_assistance_2016</code> in the code below, proceed to the "Download Center" tab on the USASpending website. Select all agencies and fiscal year 2016. After you submit the request, it will generate the dataset, which may take a few minutes. Save this .csv file in your working directory. The following analysis also requires a variety of R packages, listed below.
+To download the data, which I call <code>govt_assistance_2016</code> in the code below, proceed to the "Download Center" tab on the USASpending website. Select all agencies and fiscal year 2016. After you submit the request, it will generate the dataset, which may take a few minutes. Save this .csv file in your working directory. USASpending also provides a <a href="https://www.usaspending.gov/DownloadCenter/Documents/USAspending.govDownloadsDataDictionary.pdf" target="_blank">codebook</a> for the data available; Section 4 of the codebook pertains to grants. The following analysis also requires a variety of R packages, listed below.
 
 <?prettify?>
 <pre class="prettyprint lang-r">
@@ -31,4 +31,4 @@ require(plyr)
 govt_assistance <- read.csv('fed_assistance_fy_2016.csv', stringsAsFactors = F)
 </pre>
 
-
+Having loaded the data, we can now start to see 
