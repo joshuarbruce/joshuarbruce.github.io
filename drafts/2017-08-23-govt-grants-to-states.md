@@ -14,6 +14,7 @@ To download the data, which I call <code>govt_assistance_2016</code> in the code
 
 <?prettify?>
 <pre class="prettyprint lang-r">
+# Loading data and required packages for visualizing federal spending data
 setwd('~/My Working Directory')
 require(stringr)
 require(ggplot2)
