@@ -37,9 +37,10 @@ To begin, I make a table of the places where federal funds go. This is a count o
 
 <?prettify?>
 <pre class="prettyprint lang-r">
+# Create a table of grant frequency by state entity
 table_of_state_grants <- as.data.frame(table(
-govt_assistance$principal_place_state_code),
-stringsAsFactors = F)
+    govt_assistance$principal_place_state_code),
+    stringsAsFactors = F)
 </pre>
 
 To do so, I create a list with the 50 state abbreviations in them, 
