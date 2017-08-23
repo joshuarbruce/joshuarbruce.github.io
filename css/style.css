@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i|Open+Sans:600);	
 
 /* Set body and header text to PT Serif serif font */
-body { padding-top: 20px; padding-bottom: 40px; font-family: 'PT Serif', serif; font-size: 20px; }
+body { padding-top: 20px; padding-bottom: 40px; font-family: 'PT Serif', serif; font-size: 16px; }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'PT Serif', serif; font-weight: 700; }
 
