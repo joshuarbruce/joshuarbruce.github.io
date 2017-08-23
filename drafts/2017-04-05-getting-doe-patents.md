@@ -23,8 +23,7 @@ xmlParse(read_xml('https://www.osti.gov/doepatents/doepatentsxml?nrows=1&page=0'
 
 ... which returns the following:
 
-<pre class="prettyprint pre-scrollable">
-<code>
+<pre class="prettyprint pre-scrollable"><code>
 &lt;?xml version="1.0" encoding="UTF-8"?&rt;
 &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcq="http://purl.org/dc/terms/"&rt;
   &lt;records count="37698" morepages="true" start="1" end="1">
