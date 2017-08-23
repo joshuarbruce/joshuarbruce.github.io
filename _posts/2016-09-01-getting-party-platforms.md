@@ -253,7 +253,7 @@ require(XML)
 
 <?prettify?>
 <pre class="prettyprint lang-r">
-# Get HTML from the UCSB American Presidency webiste with 2016 Republican platform
+# Get HTML from the UCSB American Presidency website with 2016 Republican platform
 ucsb_gop_2016_platform_url <- read_html('http://www.presidency.ucsb.edu/ws/index.php?pid=117718')
 
 # parse HTML
@@ -326,7 +326,7 @@ We'll now replicate the same process for the 2016 Democratic platform.
 
 <?prettify?>
 <pre class="prettyprint lang-r">
-# Get HTML from the UCSB American Presidency webiste with 2016 Democratic platform
+# Get HTML from the UCSB American Presidency website with 2016 Democratic platform
 ucsb_dem_2016_platform_url <- read_html('http://www.presidency.ucsb.edu/ws/index.php?pid=117717')
 
 # parse HTML
