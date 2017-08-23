@@ -1,6 +1,6 @@
 ---
 layout: notes
-title: Visualizing Federal Assistance to States (with R) 
+title: Visualizing Federal Financial Assistance to States and Universities (with R) 
 date: 2017-08-23
 ---
 
