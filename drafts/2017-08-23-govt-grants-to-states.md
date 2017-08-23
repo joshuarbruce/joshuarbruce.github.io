@@ -49,7 +49,17 @@ table_of_state_grants <- as.data.frame(table(
 head(table_of_state_grants)
 </pre>
 
+<?prettify?>
+<pre class="prettyprint lang-r">
+##   Var1  Freq
+## 1      75527
+## 2   00    98
+## 3   AK  6373
+## 4   AL  7990
+## 5   AR  5042
+## 6   AS   487
+</pre>
 
-To do so, I create a list with the 50 state abbreviations in them, 
+
 
 
