@@ -71,7 +71,7 @@ result_as_list <- xmlToList(xmlParse(read_xml('https://www.osti.gov/doepatents/d
 
 Once converted to a list, we can see the number of variables in the first item as follows: <code>length(result_as_list$records[[1]])</code>. 
 
-In addition to this record's information, the results also tell us how many total records there are in the third line of the results, which states: <code>records count="37220"</code>. The entire DoE dataset is 37,698 records (last checked and updated August 22, 2017), and it grows continually as the DoE adds new information on old patents it identifies or new patents are issued.
+In addition to this record's information, the results also tell us how many total records there are in the third line of the results, which states: <code>records count="37698"</code>. The entire DoE dataset is 37,698 records (last checked and updated August 22, 2017), and it grows continually as the DoE adds new information on old patents it identifies or new patents are issued.
 
 To collect the whole dataset, I begin by constructing a dataframe to hold all of the records.
 
