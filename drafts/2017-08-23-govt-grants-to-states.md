@@ -159,10 +159,11 @@ ggplot(total_state_funding, aes(map_id = state_id)) +
     coord_map() +
     scale_x_continuous(breaks = NULL) + 
     scale_y_continuous(breaks = NULL) +
-    labs(x = "", y = "") +
+    labs(x = "", y = "", title = 'Federal Spending to US States') +
     theme(legend.position = "bottom", 
     panel.background = element_blank()) + 
     fifty_states_inset_boxes() +
     scale_fill_viridis(option = 'viridis')
 </pre>
 
+<img class="img-responsive" src="/images/notes/fed_spending_us_states.jpeg"/>
