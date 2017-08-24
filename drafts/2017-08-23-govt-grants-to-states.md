@@ -72,12 +72,15 @@ govt_assistance_states <- govt_assistance[which(
     %in% as.list(toupper(state.abb))), ]
 </pre>
 
-Having subset the data, we can now look at what types of entities in each state were receiving grants.
+### Grant recipients
+Having subset the data, we can now look at what types of entities in each state were receiving grants, according to the classification in the USASpending data.
 
 <?prettify?>
 <pre class="prettyprint lang-r">
 # Table of grant recipient types 
-table(govt_assistance_states$recipient_type)
+grant_recipient_types <- as.data.frame(table(govt_assistance_states$recipient_type), 
+                                        stringsAsFactors = F)
+print(grant_recipient_types)
 </pre>
 <?prettify?>
 <pre class="prettyprint lang-r">
@@ -110,3 +113,4 @@ table(govt_assistance_states$recipient_type)
 ##                                                 8777
 </pre>
 
+In this case, I'm interested in funding that went to a state or lower-level governmental unit, which are the first five types of entities listed in the table. 
