@@ -77,40 +77,52 @@ Having subset the data, we can now look at what types of entities in each state 
 
 <?prettify?>
 <pre class="prettyprint lang-r">
-# Table of grant recipient types 
+# Make a data frame of grant recipient types 
 grant_recipient_types <- as.data.frame(table(govt_assistance_states$recipient_type), 
                                         stringsAsFactors = F)
 print(grant_recipient_types)
 </pre>
 <?prettify?>
 <pre class="prettyprint lang-r">
-## 
-##                                 00: State government 
-##                                               365575 
-##                                01: County government 
-##                                                 5988 
-##                      02: City or township government 
-##                                                 8778 
-##                      04: Special district government 
-##                                                 2254 
-##                      05: Independent school district 
-##                                                13153 
-## 06: State controlled institution of higher education 
-##                                                68415 
-##                                     11: Indian tribe 
-##                                                13819 
-##                                  12: Other nonprofit 
-##                                                45113 
-##                         20: Private higher education 
-##                                                31154 
-##                                       21: Individual 
-##                                                11738 
-##                              22: Profit organization 
-##                                                 3633 
-##                                   23: Small business 
-##                                                 8007 
-##                                        25: All other 
-##                                                 8777
+##                                                    Var1   Freq
+## 1                                  00: State government 365575
+## 2                                 01: County government   5988
+## 3                       02: City or township government   8778
+## 4                       04: Special district government   2254
+## 5                       05: Independent school district  13153
+## 6  06: State controlled institution of higher education  68415
+## 7                                      11: Indian tribe  13819
+## 8                                   12: Other nonprofit  45113
+## 9                          20: Private higher education  31154
+## 10                                       21: Individual  11738
+## 11                              22: Profit organization   3633
+## 12                                   23: Small business   8007
+## 13                                        25: All other   8777
 </pre>
 
-In this case, I'm interested in funding that went to a state or lower-level governmental unit, which are the first five types of entities listed in the table. 
+In this case, I'm interested in funding that went to a state or lower-level governmental unit, which are the first five types of entities listed in the table. As such, I'll now make a new data frame that includes only these five types of recipients.
+
+<?prettify?>
+<pre class="prettyprint lang-r">
+state_local_assistance <- govt_assistance_states[which(
+    govt_assistance_states$recipient_type %in% grant_recipient_types[c(1:5),1]),]
+</pre>
+
+### Types of assistance 
+
+Within the federal assistance data, there are a number of variables that tell us about each grant. One of the most important for understanding funding levels is to look at new and continuing grants (rather than a funding adjustment or revision to a previous grant). The *action_type* variable identifies whether a grant is new, continuing, revised, or adjusted. I'm interested in only the new and continuing grant disbursements, so I subset to just those records.
+
+<?prettify?>
+<pre class="prettyprint lang-r">
+state_local_assistance <- state_local_assistance[which(
+    state_local_assistance$action_type == 'A: New assistance action' |
+        state_local_assistance$action_type == 'B: Continuation (funding in succeeding budget period which stemmed from prior agreement to fund amount of the current action)'),]
+</pre>
+
+We're left with 107,177 records, totaling over $476 billion in domestic assistance from the federal government to state and local entities.
+
+
+
+
+
+
