@@ -124,11 +124,11 @@ We're left with 107,177 records, totaling over $476 billion in domestic assistan
 
 ### State-by-state federal funds
 
-I next use <code><a href="http://dplyr.tidyverse.org/" target="_blank">dplyr</a></code> to calculate the total funding received by each state. 
+I next use <code><a href="http://dplyr.tidyverse.org/" target="_blank">dplyr</a></code> to calculate the total funding received by each state. I label this variable <code>state_assistance</code>, which is then used in the next code chunk to map the data.
 
 <?prettify?>
 <pre class="prettyprint lang-r">
-# create state-by-state funding totals
+# calculate state-by-state funding totals
 total_state_funding <- state_local_assistance %>% 
     group_by(principal_place_state_code) %>%
         summarise(state_assistance = sum(fed_funding_amount)) 
@@ -136,5 +136,33 @@ total_state_funding <- state_local_assistance %>%
 
 At this point, we can finally start to visualize how federal funds are distributed across the country. I start with a simple map of the fifty states shaded by their total funding amount. You can read more about creating maps in R with <code><a href="http://ggplot2.org/" target="_blank">ggplot2</a></code> and <code>fiftystater</code> <a href="https://cran.r-project.org/web/packages/fiftystater/vignettes/fiftystater.html" target="_blank">on this page</a>. (And for more on the color palette I use, check out the <code><a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html" target="_blank">viridis</a></code> package.)
 
+<?prettify?>
+<pre class="prettyprint lang-r">
+# Load fifty-state shape file from fiftystater package
+data('fifty_states')
 
+# Add column to data with lower-case state names rather than abbreviation
+total_state_funding$state_id <- ''
+
+# Loop to look up state name; make lower case to match map data
+for(i in 1:nrow(total_state_funding)){
+    total_state_funding$state_id[i] <-
+        tolower(state.name[grep(total_state_funding$principal_place_state_code[i], 
+                        state.abb)])
+}
+
+# Plot map
+ggplot(total_state_funding, aes(map_id = state_id)) + 
+    # map points to the fifty_states shape data
+    geom_map(aes(fill = state_assistance), map = fifty_states) + 
+    expand_limits(x = fifty_states$long, y = fifty_states$lat) +
+    coord_map() +
+    scale_x_continuous(breaks = NULL) + 
+    scale_y_continuous(breaks = NULL) +
+    labs(x = "", y = "") +
+    theme(legend.position = "bottom", 
+    panel.background = element_blank()) + 
+    fifty_states_inset_boxes() +
+    scale_fill_viridis(option = 'viridis')
+</pre>
 
