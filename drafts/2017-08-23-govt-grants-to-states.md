@@ -167,3 +167,10 @@ ggplot(total_state_funding, aes(map_id = state_id)) +
 </pre>
 
 <img class="img-responsive" src="/images/notes/fed_spending_us_states.jpeg"/>
+
+#### Per-capita state spending
+
+Not surprisingly, California, New York, and Texas get the most money. These are also the three most populous states. Thus, a reasonable feature to take into account is population. The next code block calculate per-capita spending by drawing in US Census population estimates for each state.
+
+There are multiple ways to incorporate demographic data into analyses. For example, the Census makes population estimates available for download <a href="https://www.census.gov/data/tables/2016/demo/popest/state-total.html" target="_blank">on its website</a>. However, in the interest of keeping the analysis contained within R, I will use the <code><a href="https://hrecht.github.io/censusapi/index.html" target="_blank">censusapi</a></code> package. Before using this package, you'll need to set up an API key on the Census website, which you can do <a href="http://api.census.gov/data/key_signup.html" target="_blank">here</a>.
+
