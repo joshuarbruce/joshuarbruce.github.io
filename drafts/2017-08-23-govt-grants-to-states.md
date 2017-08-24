@@ -114,6 +114,7 @@ Within the federal assistance data, there are a number of variables that tell us
 
 <?prettify?>
 <pre class="prettyprint lang-r">
+# create subset data frame of new and continuing funding
 state_local_assistance <- state_local_assistance[which(
     state_local_assistance$action_type == 'A: New assistance action' |
         state_local_assistance$action_type == 'B: Continuation (funding in succeeding budget period which stemmed from prior agreement to fund amount of the current action)'),]
@@ -121,6 +122,17 @@ state_local_assistance <- state_local_assistance[which(
 
 We're left with 107,177 records, totaling over $476 billion in domestic assistance from the federal government to state and local entities.
 
+### State-by-state federal funds
+
+I next use <code><a href="http://dplyr.tidyverse.org/" target="_blank">dplyr</a></code> to calculate the total funding received by each state. 
+
+<?prettify?>
+<pre class="prettyprint lang-r">
+# create state-by-state funding totals
+total_state_funding <- state_local_assistance %>% 
+group_by(principal_place_state_code) %>%
+summarise(state_assistance = sum(fed_funding_amount)) 
+</pre>
 
 
 
