@@ -130,8 +130,8 @@ I next use <code><a href="http://dplyr.tidyverse.org/" target="_blank">dplyr</a>
 <pre class="prettyprint lang-r">
 # create state-by-state funding totals
 total_state_funding <- state_local_assistance %>% 
-group_by(principal_place_state_code) %>%
-summarise(state_assistance = sum(fed_funding_amount)) 
+    group_by(principal_place_state_code) %>%
+        summarise(state_assistance = sum(fed_funding_amount)) 
 </pre>
 
 
