@@ -134,7 +134,7 @@ total_state_funding <- state_local_assistance %>%
         summarise(state_assistance = sum(fed_funding_amount)) 
 </pre>
 
-At this point, we can finally start to visualize how federal funds are distributed across the country. To do so, let's start with a simple map of the fifty states shaded by their total funding amount. You can read more about creating maps in R with the packages <code><a href="http://ggplot2.org/" target="_blank">ggplot2</a></code> and <code>fiftystater</code> <a href="https://cran.r-project.org/web/packages/fiftystater/vignettes/fiftystater.html" target="_blank">on this page</a>. (And for more on the color palette I use, check out the <code><a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html" target="_blank">viridis</a></code> package.)
+At this point, we can finally start to visualize how federal funds are distributed across the country. I start with a simple map of the fifty states shaded by their total funding amount. You can read more about creating maps in R with <code><a href="http://ggplot2.org/" target="_blank">ggplot2</a></code> and <code>fiftystater</code> <a href="https://cran.r-project.org/web/packages/fiftystater/vignettes/fiftystater.html" target="_blank">on this page</a>. (And for more on the color palette I use, check out the <code><a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html" target="_blank">viridis</a></code> package.)
 
 
 
