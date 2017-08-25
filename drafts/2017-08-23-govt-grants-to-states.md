@@ -272,8 +272,7 @@ decreasing = T),
 c(3,5)] # columns for state_id and per_capita_funding 
 </pre>
 
-<?prettify?>
-<pre class="prettyprint lang-r">
+<code>
 ## # A tibble: 50 x 2
 ##          state_id per_capita_funding
 ##             <chr>              <dbl>
@@ -327,7 +326,7 @@ c(3,5)] # columns for state_id and per_capita_funding
 ## 48         kansas           724.3746
 ## 49       virginia           668.7814
 ## 50       nebraska           434.6791
-</pre>
+</code>
 
 Having looked into state-by-state funding for the whole government, a variety of other questions can now be asked. I'll focus on two. First, what is the state-level distribution of funding from the Environmental Protection Agency (EPA)? The EPA has been singled out, as the Trump budget would heavily reduce the agency's budget, which, according to a <a href="https://www.washingtonpost.com/graphics/national/trump-epa-rollbacks/?platform=hootsuite" target="_blank">Washington Post article</a>, could have a significant, negative impact on state-level programs. 
 
