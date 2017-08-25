@@ -260,11 +260,12 @@ ggplot(total_state_funding, aes(map_id = state_id)) +
 
 <img class="img-responsive" src="/images/notes/fed_spending_us_states_percapita.jpeg"/>
 
-We can see the top 10 highest states for per-capita funding... 
+##### Rank-ordered per-capita federal funding to states 
 
 <?prettify?>
 <pre class="prettyprint lang-r">
 # Print a rank-ordered table of top 10 states per-capita federal funding
+options(tibble.print_min = 50)
 total_state_funding[order(total_state_funding$per_capita_funding, 
                             decreasing = T), 
                     c(3,5)] # columns for state_id and per_capita_funding 
@@ -273,49 +274,60 @@ total_state_funding[order(total_state_funding$per_capita_funding,
 <?prettify?>
 <pre class="prettyprint lang-r">
 ## # A tibble: 50 x 2
-##         state_id per_capita_funding
-##            <chr>              <dbl>
-##  1        alaska           2768.755
-##  2       vermont           2508.593
-##  3      new york           2405.776
-##  4      kentucky           2217.535
-##  5     louisiana           2153.096
-##  6  rhode island           2113.806
-##  7    new mexico           2034.693
-##  8      arkansas           1986.848
-##  9 massachusetts           1932.457
-## 10  north dakota           1921.106
-## # ... with 40 more rows
-</pre>
- 
-... and the 10 lowest for funding.
-
-<?prettify?>
-<pre class="prettyprint lang-r">
-# Print a rank-ordered table of top 10 states per-capita federal funding
-total_state_funding[order(total_state_funding$per_capita_funding, 
-                            decreasing = F), 
-                    c(3,5)] # columns for state_id and per_capita_funding 
-</pre>
- 
-<?prettify?>
-<pre class="prettyprint lang-r">
-## # A tibble: 50 x 2
 ##          state_id per_capita_funding
 ##             <chr>              <dbl>
-##  1       nebraska           434.6791
-##  2       virginia           668.7814
-##  3         kansas           724.3746
-##  4           utah           877.6799
-##  5        florida           930.6878
-##  6        georgia          1034.1041
-##  7   south dakota          1067.0331
-##  8      wisconsin          1074.1797
-##  9          idaho          1079.1449
-## 10 north carolina          1150.6585
-## # ... with 40 more rows
+##  1         alaska          2768.7554
+##  2        vermont          2508.5928
+##  3       new york          2405.7763
+##  4       kentucky          2217.5354
+##  5      louisiana          2153.0957
+##  6   rhode island          2113.8055
+##  7     new mexico          2034.6928
+##  8       arkansas          1986.8485
+##  9  massachusetts          1932.4569
+## 10   north dakota          1921.1059
+## 11        montana          1861.3508
+## 12     california          1830.5677
+## 13       delaware          1826.5266
+## 14    mississippi          1814.5886
+## 15  west virginia          1801.9148
+## 16    connecticut          1766.0705
+## 17       michigan          1750.9256
+## 18         oregon          1706.3330
+## 19          maine          1697.9878
+## 20         hawaii          1586.1937
+## 21        wyoming          1582.6338
+## 22        arizona          1579.7738
+## 23     new jersey          1564.4301
+## 24        indiana          1533.1844
+## 25      minnesota          1528.4687
+## 26           iowa          1481.9301
+## 27     washington          1435.8609
+## 28       missouri          1428.5307
+## 29       maryland          1370.7874
+## 30   pennsylvania          1355.9804
+## 31        alabama          1307.1957
+## 32           ohio          1299.9173
+## 33         nevada          1270.8444
+## 34          texas          1252.0911
+## 35       oklahoma          1240.8785
+## 36       colorado          1231.7817
+## 37      tennessee          1216.1975
+## 38       illinois          1209.7643
+## 39 south carolina          1208.4932
+## 40  new hampshire          1200.9699
+## 41 north carolina          1150.6585
+## 42          idaho          1079.1449
+## 43      wisconsin          1074.1797
+## 44   south dakota          1067.0331
+## 45        georgia          1034.1041
+## 46        florida           930.6878
+## 47           utah           877.6799
+## 48         kansas           724.3746
+## 49       virginia           668.7814
+## 50       nebraska           434.6791
 </pre>
-
+ 
 
 
 
