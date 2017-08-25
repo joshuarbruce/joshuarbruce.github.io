@@ -270,7 +270,7 @@ total_state_funding[order(total_state_funding$per_capita_funding,
                             decreasing = T), 
                     c(3,5)] # columns for state_id and per_capita_funding 
 
-## # A tibble: 50 x 2
+##  A tibble: 50 x 2
 ##          state_id per_capita_funding
 ##             <chr>              <dbl>
 ##  1         alaska          2768.7554
