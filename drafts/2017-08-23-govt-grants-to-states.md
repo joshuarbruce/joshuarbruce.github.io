@@ -233,11 +233,10 @@ as.numeric(total_state_funding$POP)
 # Summarize per-capita funding
 summary(total_state_funding$per_capita_funding)
 </pre>
-
 <?prettify?>
 <pre class="prettyprint lang-r">
-##  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-## 434.7  1211.0  1505.0  1521.0  1824.0  2769.0 
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   434.7  1211.0  1505.0  1521.0  1824.0  2769.0
 </pre>
 
 As we can see, federal funding to state and local government entities ranged from $434.70/person to $2,769/person in fiscal year 2016. We can now map this using a slightly altered version of the code block above. 
@@ -261,11 +260,59 @@ ggplot(total_state_funding, aes(map_id = state_id)) +
 
 <img class="img-responsive" src="/images/notes/fed_spending_us_states_percapita.jpeg"/>
 
+##### 10 Highest Per-Capita Funded States 
 <?prettify?>
 <pre class="prettyprint lang-r">
-# Print a rank-ordered table of all 50 states per-capita federal funding
+# Print a rank-ordered table of top 10 states per-capita federal funding
 total_state_funding[order(total_state_funding$per_capita_funding, 
                             decreasing = T), 
                     c(3,5)] # columns for state_id and per_capita_funding 
 </pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
+## # A tibble: 50 x 2
+##         state_id per_capita_funding
+##            <chr>              <dbl>
+##  1        alaska           2768.755
+##  2       vermont           2508.593
+##  3      new york           2405.776
+##  4      kentucky           2217.535
+##  5     louisiana           2153.096
+##  6  rhode island           2113.806
+##  7    new mexico           2034.693
+##  8      arkansas           1986.848
+##  9 massachusetts           1932.457
+## 10  north dakota           1921.106
+## # ... with 40 more rows
+</pre>
+
+##### 10 Lowest Per-Capita Funded States 
+<?prettify?>
+<pre class="prettyprint lang-r">
+# Print a rank-ordered table of top 10 states per-capita federal funding
+total_state_funding[order(total_state_funding$per_capita_funding, 
+                            decreasing = F), 
+                    c(3,5)] # columns for state_id and per_capita_funding 
+</pre>
+<?prettify?>
+<pre class="prettyprint lang-r">
+## # A tibble: 50 x 2
+##          state_id per_capita_funding
+##             <chr>              <dbl>
+##  1       nebraska           434.6791
+##  2       virginia           668.7814
+##  3         kansas           724.3746
+##  4           utah           877.6799
+##  5        florida           930.6878
+##  6        georgia          1034.1041
+##  7   south dakota          1067.0331
+##  8      wisconsin          1074.1797
+##  9          idaho          1079.1449
+## 10 north carolina          1150.6585
+## # ... with 40 more rows
+</pre>
+
+
+
+
 
