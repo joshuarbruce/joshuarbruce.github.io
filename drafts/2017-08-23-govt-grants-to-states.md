@@ -285,6 +285,7 @@ total_state_funding[order(total_state_funding$per_capita_funding,
 ##  9 massachusetts           1932.457
 ## 10  north dakota           1921.106
 ## # ... with 40 more rows
+
 </pre>
  
 ##### 10 Lowest Per-Capita Funded States 
@@ -312,6 +313,7 @@ total_state_funding[order(total_state_funding$per_capita_funding,
 ##  9          idaho          1079.1449
 ## 10 north carolina          1150.6585
 ## # ... with 40 more rows
+
 </pre>
 
 
