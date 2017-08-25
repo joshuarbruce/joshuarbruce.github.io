@@ -261,6 +261,17 @@ ggplot(total_state_funding, aes(map_id = state_id)) +
 
 <img class="img-responsive" src="/images/notes/fed_spending_us_states_percapita.jpeg"/>
 
+To get a sense of the actual values, we can also print a rank-ordered table of per-capita federal funding.
+
+<?prettify?>
+<pre class="prettyprint lang-r">
+# Print a rank-ordered table of top 10 states per-capita federal funding
+options(tibble.print_min = 50)
+total_state_funding[order(total_state_funding$per_capita_funding, 
+decreasing = T), 
+c(3,5)] # columns for state_id and per_capita_funding 
+</pre>
+
 Having looked into state-by-state funding for the whole government, a variety of other questions can now be asked. I'll focus on two. First, what is the state-level distribution of funding from the Environmental Protection Agency (EPA)? The EPA has been singled out, as the Trump budget would heavily reduce the agency's budget, which, according to a <a href="https://www.washingtonpost.com/graphics/national/trump-epa-rollbacks/?platform=hootsuite" target="_blank">Washington Post article</a>, could have a significant, negative impact on state-level programs. 
 
 
