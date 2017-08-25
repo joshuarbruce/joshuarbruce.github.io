@@ -325,7 +325,7 @@ total_state_funding[order(total_state_funding$per_capita_funding,
 ## 47           utah           877.6799
 ## 48         kansas           724.3746
 ## 49       virginia           668.7814
-## 50       nebraska           434.6791
+## 50       nebraska           434.6791 
 </pre>
 
 The table above demonstrates the decreasing per-capita funding to state and local government entities from the federal government. 
