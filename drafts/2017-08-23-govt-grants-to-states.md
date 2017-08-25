@@ -240,3 +240,26 @@ summary(total_state_funding$per_capita_funding)
 ## 434.7  1211.0  1505.0  1521.0  1824.0  2769.0 
 </pre>
 
+As we can see, federal funding to state and local government entities ranged from $434.70/person to $2,769/person in fiscal year 2016. We can now map this using a slightly altered version of the code block above. 
+
+<?prettify?>
+<pre class="prettyprint lang-r">
+# Plot map - per-capita federal funding in FY 2016
+ggplot(total_state_funding, aes(map_id = state_id)) + 
+    # map points to the fifty_states shape data
+    geom_map(aes(fill = per_capita_funding), map = fifty_states) + 
+    expand_limits(x = fifty_states$long, y = fifty_states$lat) +
+    coord_map() +
+    scale_x_continuous(breaks = NULL) + 
+    scale_y_continuous(breaks = NULL) +
+    labs(x = "", y = "", title = 'Federal Spending to US States') +
+    theme(legend.position = "bottom", 
+    panel.background = element_blank()) + 
+    fifty_states_inset_boxes() +
+    scale_fill_viridis(option = 'viridis')
+</pre>
+
+<img class="img-responsive" src="/images/notes/fed_spending_us_states_percapita.jpeg"/>
+
+
+
