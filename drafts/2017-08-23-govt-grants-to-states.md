@@ -261,6 +261,8 @@ ggplot(total_state_funding, aes(map_id = state_id)) +
 
 <img class="img-responsive" src="/images/notes/fed_spending_us_states_percapita.jpeg"/>
 
+To get a sense of the actual values, we can also print a rank-ordered table of per-capita federal funding.
+
 <?prettify?>
 <pre class="prettyprint lang-r">
 # Print a rank-ordered table of top 10 states per-capita federal funding
@@ -323,5 +325,3 @@ total_state_funding[order(total_state_funding$per_capita_funding,
 ## 49       virginia           668.7814
 ## 50       nebraska           434.6791 
 </pre>
-
-The table above demonstrates the decreasing per-capita funding to state and local government entities from the federal government. 
