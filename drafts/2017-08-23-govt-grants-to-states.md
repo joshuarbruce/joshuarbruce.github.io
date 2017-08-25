@@ -172,5 +172,23 @@ ggplot(total_state_funding, aes(map_id = state_id)) +
 
 Not surprisingly, California, New York, and Texas get the most money. These are also the three most populous states. Thus, a reasonable feature to take into account is population. The next code block calculate per-capita spending by drawing in US Census population estimates for each state.
 
-There are multiple ways to incorporate demographic data into analyses. For example, the Census makes population estimates available for download <a href="https://www.census.gov/data/tables/2016/demo/popest/state-total.html" target="_blank">on its website</a>. However, in the interest of keeping the analysis contained within R, I will use the <code><a href="https://hrecht.github.io/censusapi/index.html" target="_blank">censusapi</a></code> package. Before using this package, you'll need to set up an API key on the Census website, which you can do <a href="http://api.census.gov/data/key_signup.html" target="_blank">here</a>.
+There are multiple ways to incorporate demographic data into analyses. For example, the Census makes population estimates available for download <a href="https://www.census.gov/data/tables/2016/demo/popest/state-total.html" target="_blank">on its website</a>. However, in the interest of keeping the analysis contained within R, I will use the <code><a href="https://hrecht.github.io/censusapi/index.html" target="_blank">censusapi</a></code> package. Before using this package, you'll need to set up an API key on the Census website, which you can do <a href="http://api.census.gov/data/key_signup.html" target="_blank">here</a>. It's worth spending some time getting to know the <code>censusapi</code> package, starting with the list of available APIs. You can make a table of these with <code>as.data.frame(listCensusApis())</code>. The API I use here is the "Vintage 2016 Population Estimates: Population Estimates," known as 'pep/population' in the API. You can also see the list of variables included in a Census API with the <code>listCensusMetadata()</code> command (in this case, <code>listCensusMetadata(name="pep/population", type = "variables", vintage = 2016)</code>).
 
+<?prettify?>
+<pre class="prettyprint lang-r">
+# Get population data from censusapi
+# Set your Census API key using Sys.setenv(CENSUS_KEY='YOUR_API_KEY')
+
+# Download Census population estimates by state for 2016
+population_data <- getCensus(name = 'pep/population', 
+                                vars = c('STATE', 'POP'), 
+                                region = "state:*", 
+                                vintage = 2016)
+
+# Load state FIPS data in R
+data('state.fips')
+
+# Loop to match state name and abbreviation to FIPS in population_data
+for(i in 1:nrow(population_data))
+
+</pre>
