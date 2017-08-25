@@ -272,61 +272,14 @@ decreasing = T),
 c(3,5)] # columns for state_id and per_capita_funding 
 </pre>
 
-<code>
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## # A tibble: 50 x 2
 ##          state_id per_capita_funding
 ##             <chr>              <dbl>
 ##  1         alaska          2768.7554
-##  2        vermont          2508.5928
-##  3       new york          2405.7763
-##  4       kentucky          2217.5354
-##  5      louisiana          2153.0957
-##  6   rhode island          2113.8055
-##  7     new mexico          2034.6928
-##  8       arkansas          1986.8485
-##  9  massachusetts          1932.4569
-## 10   north dakota          1921.1059
-## 11        montana          1861.3508
-## 12     california          1830.5677
-## 13       delaware          1826.5266
-## 14    mississippi          1814.5886
-## 15  west virginia          1801.9148
-## 16    connecticut          1766.0705
-## 17       michigan          1750.9256
-## 18         oregon          1706.3330
-## 19          maine          1697.9878
-## 20         hawaii          1586.1937
-## 21        wyoming          1582.6338
-## 22        arizona          1579.7738
-## 23     new jersey          1564.4301
-## 24        indiana          1533.1844
-## 25      minnesota          1528.4687
-## 26           iowa          1481.9301
-## 27     washington          1435.8609
-## 28       missouri          1428.5307
-## 29       maryland          1370.7874
-## 30   pennsylvania          1355.9804
-## 31        alabama          1307.1957
-## 32           ohio          1299.9173
-## 33         nevada          1270.8444
-## 34          texas          1252.0911
-## 35       oklahoma          1240.8785
-## 36       colorado          1231.7817
-## 37      tennessee          1216.1975
-## 38       illinois          1209.7643
-## 39 south carolina          1208.4932
-## 40  new hampshire          1200.9699
-## 41 north carolina          1150.6585
-## 42          idaho          1079.1449
-## 43      wisconsin          1074.1797
-## 44   south dakota          1067.0331
-## 45        georgia          1034.1041
-## 46        florida           930.6878
-## 47           utah           877.6799
-## 48         kansas           724.3746
-## 49       virginia           668.7814
-## 50       nebraska           434.6791
-</code>
+
+</pre>
 
 Having looked into state-by-state funding for the whole government, a variety of other questions can now be asked. I'll focus on two. First, what is the state-level distribution of funding from the Environmental Protection Agency (EPA)? The EPA has been singled out, as the Trump budget would heavily reduce the agency's budget, which, according to a <a href="https://www.washingtonpost.com/graphics/national/trump-epa-rollbacks/?platform=hootsuite" target="_blank">Washington Post article</a>, could have a significant, negative impact on state-level programs. 
 
