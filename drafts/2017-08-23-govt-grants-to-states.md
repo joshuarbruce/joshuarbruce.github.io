@@ -288,6 +288,7 @@ total_state_funding[order(total_state_funding$per_capita_funding,
 </pre>
 
 ##### 10 Lowest Per-Capita Funded States 
+
 <?prettify?>
 <pre class="prettyprint lang-r">
 # Print a rank-ordered table of top 10 states per-capita federal funding
