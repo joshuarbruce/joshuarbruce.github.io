@@ -202,16 +202,30 @@ state_fips$state <- as.character(state_fips$state)
 state_fips$state_fips <- as.character(state_fips$state_fips)
 
 # Make columns for state name and abbreviation in population data
-population_data$state_abbrev <- ''
+# Re-use principal_place_state_code as name for merge later
+population_data$principal_place_state_code <- ''
 
 # Loop to match state name and abbreviation to FIPS in population_data
 for(i in 1:nrow(population_data)){
-    population_data$state_abbrev[i] <- state_fips$state[which(
-                                            state_fips$state_fips==
-                                                population_data$STATE[i])]
+    population_data$principal_place_state_code[i] <- 
+        state_fips$state[which(state_fips$state_fips ==
+                                population_data$STATE[i])]
 }
+
+# clean up data frame by only keeping columns with abbreviations and population
+population_data <- subset(population_data, 
+                            select = c('principal_place_state_code', 'POP'))
 </pre>
 
+Now, we can merge the population data with the total state spending data and calculate per-capita spending. 
+
+<?prettify?>
+<pre class="prettyprint lang-r">
+# Merge population data with total_state_funding data frame
+total_state_funding <- full_join(total_state_funding,
+                                    population_data,
+                                    by = 'principal_place_state_code')
+</pre>
 
 
 
