@@ -222,10 +222,21 @@ Now, we can merge the population data with the total state spending data and cal
 <?prettify?>
 <pre class="prettyprint lang-r">
 # Merge population data with total_state_funding data frame
-total_state_funding <- full_join(total_state_funding,
+total_state_funding <- left_join(total_state_funding,
                                     population_data,
                                     by = 'principal_place_state_code')
+
+# Divide 2016 spending by estimated 2016 population
+total_state_funding$per_capita_funding <- as.numeric(total_state_funding$state_assistance)/
+as.numeric(total_state_funding$POP)
+
+# Summarize per-capita funding
+summary(total_state_funding$per_capita_funding)
 </pre>
 
-
+<?prettify?>
+<pre class="prettyprint lang-r">
+##  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## 434.7  1211.0  1505.0  1521.0  1824.0  2769.0 
+</pre>
 
