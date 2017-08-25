@@ -261,5 +261,11 @@ ggplot(total_state_funding, aes(map_id = state_id)) +
 
 <img class="img-responsive" src="/images/notes/fed_spending_us_states_percapita.jpeg"/>
 
-
+<?prettify?>
+<pre class="prettyprint lang-r">
+# Print a rank-ordered table of all 50 states per-capita federal funding
+total_state_funding[order(total_state_funding$per_capita_funding, 
+                            decreasing = T), 
+                    c(3,5)] # columns for state_id and per_capita_funding 
+</pre>
 
