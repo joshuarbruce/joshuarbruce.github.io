@@ -271,6 +271,8 @@ total_state_funding[order(total_state_funding$per_capita_funding,
                             decreasing = T), 
                     c(3,5)] # columns for state_id and per_capita_funding 
 
+<?prettify?>
+<pre class="prettyprint lang-r">
 ## # A tibble: 50 x 2
 ##          state_id per_capita_funding
 ##             <chr>              <dbl>
