@@ -184,11 +184,33 @@ population_data <- getCensus(name = 'pep/population',
                                 vars = c('STATE', 'POP'), 
                                 region = "state:*", 
                                 vintage = 2016)
+</pre>
 
-# Load state FIPS data in R
-data('state.fips')
+The STATE variable in the population data is the state FIPS code, rather than the state name. We haven't made use of FIPS codes thus far, and so need to convert them to names or abbreviations. Thankfully, the <code>noncensus</code> package is here to help. After creating a table with state abbreviations and corresponding FIPS codes, I run a loop to add the abbreviations to the population data frame.
+
+<?prettify?>
+<pre class="prettyprint lang-r">
+# Load noncensus package 
+require(noncensus)
+data("counties")
+
+# Use dplyr to create table of states and state FIPS codes 
+state_fips <- distinct(select(counties, state, state_fips))
+
+# Make character instead of factor
+state_fips$state <- as.character(state_fips$state)
+state_fips$state_fips <- as.character(state_fips$state_fips)
+
+# Make columns for state name and abbreviation in population data
+population_data$state_abbrev <- ''
 
 # Loop to match state name and abbreviation to FIPS in population_data
-for(i in 1:nrow(population_data))
-
+for(i in 1:nrow(population_data)){
+    population_data$state_abbrev[i] <- state_fips$state[which(state_fips$state_fips==
+                                                                population_data$STATE[i])]
+}
 </pre>
+
+
+
+
