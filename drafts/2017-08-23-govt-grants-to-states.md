@@ -260,7 +260,8 @@ ggplot(total_state_funding, aes(map_id = state_id)) +
 
 <img class="img-responsive" src="/images/notes/fed_spending_us_states_percapita.jpeg"/>
 
-##### 10 Highest Per-Capita Funded States 
+We can see the top 10 highest states for per-capita funding... 
+
 <?prettify?>
 <pre class="prettyprint lang-r">
 # Print a rank-ordered table of top 10 states per-capita federal funding
@@ -285,10 +286,10 @@ total_state_funding[order(total_state_funding$per_capita_funding,
 ##  9 massachusetts           1932.457
 ## 10  north dakota           1921.106
 ## # ... with 40 more rows
-
 </pre>
  
-##### 10 Lowest Per-Capita Funded States 
+... and the 10 lowest for funding.
+
 <?prettify?>
 <pre class="prettyprint lang-r">
 # Print a rank-ordered table of top 10 states per-capita federal funding
@@ -313,7 +314,6 @@ total_state_funding[order(total_state_funding$per_capita_funding,
 ##  9          idaho          1079.1449
 ## 10 north carolina          1150.6585
 ## # ... with 40 more rows
-
 </pre>
 
 
