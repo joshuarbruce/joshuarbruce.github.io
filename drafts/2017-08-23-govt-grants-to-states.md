@@ -286,7 +286,7 @@ total_state_funding[order(total_state_funding$per_capita_funding,
 ## 10  north dakota           1921.106
 ## # ... with 40 more rows
 </pre>
-
+ 
 ##### 10 Lowest Per-Capita Funded States 
 <?prettify?>
 <pre class="prettyprint lang-r">
@@ -295,7 +295,7 @@ total_state_funding[order(total_state_funding$per_capita_funding,
                             decreasing = F), 
                     c(3,5)] # columns for state_id and per_capita_funding 
 </pre>
-
+ 
 <?prettify?>
 <pre class="prettyprint lang-r">
 ## # A tibble: 50 x 2
