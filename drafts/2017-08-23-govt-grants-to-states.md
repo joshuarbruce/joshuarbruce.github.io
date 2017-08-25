@@ -186,7 +186,7 @@ population_data <- getCensus(name = 'pep/population',
                                 vintage = 2016)
 </pre>
 
-The STATE variable in the population data is the state FIPS code, rather than the state name. We haven't made use of FIPS codes thus far, and so need to convert them to names or abbreviations. Thankfully, the <code>noncensus</code> package is here to help. After creating a table with state abbreviations and corresponding FIPS codes, I run a loop to add the abbreviations to the population data frame.
+The STATE variable in the population data is the state FIPS code, rather than the state name. We haven't made use of FIPS codes thus far, and so need to convert them to names or abbreviations. Thankfully, the <code><a href="https://cran.r-project.org/web/packages/noncensus/noncensus.pdf" target="_blank">noncensus</a></code> package is here to help. After creating a table with state abbreviations and corresponding FIPS codes, I run a loop to add the abbreviations to the population data frame.
 
 <?prettify?>
 <pre class="prettyprint lang-r">
