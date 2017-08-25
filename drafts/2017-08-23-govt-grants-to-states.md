@@ -274,7 +274,9 @@ c(3,5)] # columns for state_id and per_capita_funding
 
 <?prettify?>
 <pre class="prettyprint lang-r">
+## # A tibble: 50 x 2
 ##          state_id per_capita_funding
+##             
 ##  1         alaska          2768.7554
 ##  2        vermont          2508.5928
 ##  3       new york          2405.7763
