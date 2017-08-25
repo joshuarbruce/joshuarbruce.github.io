@@ -206,8 +206,9 @@ population_data$state_abbrev <- ''
 
 # Loop to match state name and abbreviation to FIPS in population_data
 for(i in 1:nrow(population_data)){
-    population_data$state_abbrev[i] <- state_fips$state[which(state_fips$state_fips==
-                                                                population_data$STATE[i])]
+    population_data$state_abbrev[i] <- state_fips$state[which(
+                                            state_fips$state_fips==
+                                                population_data$STATE[i])]
 }
 </pre>
 
