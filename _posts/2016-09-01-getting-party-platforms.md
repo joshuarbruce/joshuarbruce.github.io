@@ -1,6 +1,6 @@
 ---
 layout: notes
-title: Collecting US Political Party Platform Texts (Using R)
+title: Collecting US Political Party Platform Texts (with R)
 date: 2016-09-01
 ---
 
