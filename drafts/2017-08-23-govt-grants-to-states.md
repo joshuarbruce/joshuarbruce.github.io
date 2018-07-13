@@ -1,6 +1,6 @@
 ---
 layout: notes
-title: Visualizing Federal Financial Assistance to States (with R) 
+title: Visualizing Per-Capita Federal Financial Assistance to States (with R) 
 date: 2017-08-23
 ---
 
