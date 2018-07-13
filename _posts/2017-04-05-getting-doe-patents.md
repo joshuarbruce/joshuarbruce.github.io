@@ -1,6 +1,6 @@
 ---
 layout: notes
-title: Collecting Dept. of Energy-Supported Patents
+title: Collecting Dept. of Energy-Supported Patents (with R)
 date: 2017-04-05
 ---
 
