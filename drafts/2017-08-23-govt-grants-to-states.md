@@ -1,6 +1,6 @@
 ---
 layout: notes
-title: Visualizing Federal Financial Assistance to States and Universities (with R) 
+title: Visualizing Federal Financial Assistance to States (with R) 
 date: 2017-08-23
 ---
 
@@ -329,8 +329,7 @@ c(3,5)] # columns for state_id and per_capita_funding
 ## 50       nebraska           434.6791
 </pre>
 
-### Environmental Protection Agency funding to state and local entities
+### End Note
 
-Having looked into state-by-state funding for the whole government, a variety of other questions can now be asked. I'll focus on two. First, what is the state-level distribution of funding from the Environmental Protection Agency (EPA)? The EPA has been singled out, as the Trump budget would heavily reduce the agency's budget, which, according to a <a href="https://www.washingtonpost.com/graphics/national/trump-epa-rollbacks/?platform=hootsuite" target="_blank">Washington Post article</a>, could have a significant, negative impact on state-level programs. 
-
+I had originally intended to go into agency-specific funding, but time and energy have gone elsewhere. 
 
