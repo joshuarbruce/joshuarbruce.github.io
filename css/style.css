@@ -124,11 +124,9 @@ blockquote {
 /* Creating custom collapsible items */
 
 .collapsible {
-  background-color: #777;
-  color: white;
+  color: black;
   cursor: pointer;
-  padding: 18px;
-  width: 100%;
+  padding: 10px;
   border: none;
   text-align: left;
   outline: none;
@@ -136,7 +134,6 @@ blockquote {
 }
 
 .active, .collapsible:hover {
-  background-color: #555;
 }
 
 .content {
@@ -144,5 +141,4 @@ blockquote {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  background-color: #f1f1f1;
 }
