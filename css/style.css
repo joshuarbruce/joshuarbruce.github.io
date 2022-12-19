@@ -126,7 +126,7 @@ blockquote {
 .collapsible {
   color: black;
   cursor: pointer;
-  padding: 10px;
+  padding: 6px;
   border: none;
   text-align: left;
   outline: none;
