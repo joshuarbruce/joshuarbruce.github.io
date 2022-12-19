@@ -121,6 +121,11 @@ blockquote {
   border-radius: 50%;
 }
 
+/* Trying rounded corners on a square instead */
+img.rounded-corners {
+  border-radius: 30px;
+}
+
 /* Creating custom collapsible items */
 
 .collapsible {
